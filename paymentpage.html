@@ -35,7 +35,7 @@
             <input type="password" placeholder="Enter your password" class="box" id="loginPassword" required>
             <input type="submit" value="Log In" class="btn">
             <p>Don't have an account? <a href="#" id="signupLink">Create Account</a></p>
-            <p id="loginMessage" class="form-message"></p>
+            <p id="loginMessage" style="color: red; display: none;"></p>
         </form>
     </div>
 
@@ -51,7 +51,7 @@
             <input type="password" placeholder="Confirm password" class="box" id="signupConfirmPassword" required>
             <input type="submit" value="Sign Up" class="btn">
             <p>Already have an account? <a href="#" id="loginLink">Log In</a></p>
-            <p id="signupMessage" class="form-message"></p>
+            <p id="signupMessage" style="color: green; display: none;"></p>
         </form>
     </div>
 
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <button type="submit" class="submit-btn">Pay Now</button>
-                <p id="paymentMessage" class="form-message"></p>
+                <p id="paymentMessage" style="color: green; display: none;"></p>
             </form>
         </div>
     </section>
@@ -184,5 +184,47 @@
         </div>
     </section>
     <div class="end">Made by Group-15 | All Rights Reserved ©</div>
+
+    <!-- JavaScript for Login/Signup (Shared with index.html) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.querySelector('#login .btn');
+            const loginFormContainer = document.querySelector('.login-form-container');
+            const signupFormContainer = document.querySelector('.sign-form-container');
+            const closeLoginForm = document.querySelector('#close-login-form');
+            const closeSignForm = document.querySelector('#close-sign-form');
+            const signupLink = document.querySelector('#signupLink');
+            const loginLink = document.querySelector('#loginLink');
+
+            // Show login form
+            loginBtn.addEventListener('click', () => {
+                loginFormContainer.classList.add('active');
+            });
+
+            // Close login form
+            closeLoginForm.addEventListener('click', () => {
+                loginFormContainer.classList.remove('active');
+            });
+
+            // Show signup form from login form
+            signupLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginFormContainer.classList.remove('active');
+                signupFormContainer.classList.add('active');
+            });
+
+            // Show login form from signup form
+            loginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupFormContainer.classList.remove('active');
+                loginFormContainer.classList.add('active');
+            });
+
+            // Close signup form
+            closeSignForm.addEventListener('click', () => {
+                signupFormContainer.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

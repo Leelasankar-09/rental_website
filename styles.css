@@ -16,6 +16,26 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+    border: 2px solid var(--light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0077cc;
+}
+
 /* Base Styles */
 html {
     font-size: 62.5%;
@@ -253,6 +273,12 @@ section {
 .form-container .fa-times:hover {
     color: var(--accent);
     transform: scale(1.1);
+}
+
+.form-message {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    display: none;
 }
 
 @keyframes slideUp {
