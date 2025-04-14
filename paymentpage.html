@@ -2,154 +2,187 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Form</title>
-    <!-- Custom CSS file link -->
+    <title>Vroom - Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="payment.css">
-    <!-- QRCode.js for client-side QR code generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="payment.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <form action="/submit-payment" method="POST" id="payment-form">
-            <div class="row">
-                <div class="col">
-                    <h3 class="title"><b>Payment Details</b></h3>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo"><span>Vr</span>oom</a>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#vehicles">Vehicles</a>
+            <a href="index.html#featured">Featured</a>
+            <a href="index.html#reviews">Reviews</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div id="login">
+            <button class="btn">Login</button>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
 
-                    <!-- Payment Method Toggle -->
-                    <div class="inputBox payment-method">
-                        <label>Choose Payment Method:</label>
-                        <div class="method-toggle">
-                            <input type="radio" name="payment-method" id="card-method" value="card" checked>
-                            <label for="card-method">Credit/Debit Card</label>
-                            <input type="radio" name="payment-method" id="upi-method" value="upi">
-                            <label for="upi-method">UPI</label>
-                        </div>
-                    </div>
-
-                    <!-- Card Payment Section -->
-                    <div class="payment-section" id="card-section">
-                        <div class="inputBox">
-                            <label for="card-types">Cards Accepted:</label>
-                            <img src="./assets/card_img.png" alt="Accepted payment cards (Visa, MasterCard, etc.)">
-                        </div>
-                        <div class="inputBox">
-                            <label for="card-name">Name on Card:</label>
-                            <input type="text" id="card-name" placeholder="John Doe" required>
-                        </div>
-                        <div class="inputBox">
-                            <label for="card-number">Credit Card Number:</label>
-                            <input type="text" id="card-number" placeholder="1111 2222 3333 4444" pattern="[0-9\s]{13,19}" required>
-                        </div>
-                        <div class="inputBox">
-                            <label for="exp-month">Expiration Month:</label>
-                            <input type="text" id="exp-month" placeholder="January" required>
-                        </div>
-                        <div class="flex">
-                            <div class="inputBox">
-                                <label for="exp-year">Expiration Year:</label>
-                                <input type="number" id="exp-year" placeholder="2025" min="2025" required>
-                            </div>
-                            <div class="inputBox">
-                                <label for="cvv">CVV:</label>
-                                <input type="text" id="cvv" placeholder="123" pattern="[0-9]{3,4}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- UPI Payment Section -->
-                    <div class="payment-section" id="upi-section" style="display: none;">
-                        <div class="inputBox">
-                            <label for="bill-amount">Bill Amount (₹):</label>
-                            <input type="number" id="bill-amount" placeholder="Enter amount (e.g., 500)" step="0.01" min="1" required>
-                        </div>
-                        <div class="inputBox">
-                            <label for="upi-id">UPI ID (VPA, optional):</label>
-                            <input type="text" id="upi-id" placeholder="yourname@upi" pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Enter a valid UPI ID (e.g., yourname@upi)">
-                        </div>
-                        <div class="inputBox">
-                            <label>Scan QR Code to Pay:</label>
-                            <div id="upi-qr-code"></div>
-                            <p class="upi-help">Scan with PhonePe, Google Pay, or any UPI app to pay instantly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn">Proceed to Checkout</button>
+    <!-- Login Form -->
+    <div class="login-form-container form-container">
+        <span class="fas fa-times" id="close-login-form"></span>
+        <form id="loginForm">
+            <h3>Log In</h3>
+            <input type="text" placeholder="Enter your username" class="box" id="loginUsername" required>
+            <input type="password" placeholder="Enter your password" class="box" id="loginPassword" required>
+            <input type="submit" value="Log In" class="btn">
+            <p>Don't have an account? <a href="#" id="signupLink">Create Account</a></p>
+            <p id="loginMessage" class="form-message"></p>
         </form>
     </div>
 
-    <!-- JavaScript for toggling payment methods and instant QR code -->
-    <script>
-        // Toggle payment methods
-        const cardMethod = document.getElementById('card-method');
-        const upiMethod = document.getElementById('upi-method');
-        const cardSection = document.getElementById('card-section');
-        const upiSection = document.getElementById('upi-section');
-        const billAmountInput = document.getElementById('bill-amount');
-        const qrCodeDiv = document.getElementById('upi-qr-code');
+    <!-- Sign-up Form -->
+    <div class="sign-form-container form-container">
+        <span class="fas fa-times" id="close-sign-form"></span>
+        <form id="signupForm">
+            <h3>Create Account</h3>
+            <input type="email" placeholder="Enter your email" class="box" id="signupEmail" required>
+            <input type="text" placeholder="Enter your name" class="box" id="signupName" required>
+            <input type="text" placeholder="Choose a username" class="box" id="signupUsername" required>
+            <input type="password" placeholder="Enter password" class="box" id="signupPassword" required>
+            <input type="password" placeholder="Confirm password" class="box" id="signupConfirmPassword" required>
+            <input type="submit" value="Sign Up" class="btn">
+            <p>Already have an account? <a href="#" id="loginLink">Log In</a></p>
+            <p id="signupMessage" class="form-message"></p>
+        </form>
+    </div>
 
-        cardMethod.addEventListener('change', () => {
-            cardSection.style.display = 'block';
-            upiSection.style.display = 'none';
-            toggleRequired(cardSection, true);
-            toggleRequired(upiSection, false);
-        });
+    <!-- Payment Section -->
+    <section class="payment" id="payment">
+        <h1 class="heading">Complete Your <span>Payment</span></h1>
+        <div class="container">
+            <form id="paymentForm">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="title">Rental Details</h3>
+                        <div class="inputBox">
+                            <label>Vehicle Type:</label>
+                            <span id="vehicleType">Loading...</span>
+                        </div>
+                        <div class="inputBox">
+                            <label>Vehicle:</label>
+                            <span id="vehicleName">Loading...</span>
+                        </div>
+                        <div class="inputBox">
+                            <label>Price:</label>
+                            <span id="vehiclePrice">Loading...</span>
+                        </div>
+                        <div class="inputBox">
+                            <label for="rentalDays">Rental Days:</label>
+                            <input type="number" id="rentalDays" placeholder="Enter number of days" min="1" required>
+                        </div>
 
-        upiMethod.addEventListener('change', () => {
-            cardSection.style.display = 'none';
-            upiSection.style.display = 'block';
-            toggleRequired(cardSection, false);
-            toggleRequired(upiSection, true);
-            updateQRCode(); // Generate QR code on UPI selection
-        });
+                        <!-- Payment Method Toggle -->
+                        <div class="inputBox payment-method">
+                            <label>Choose Payment Method:</label>
+                            <div class="method-toggle">
+                                <input type="radio" name="payment-method" id="card-method" value="card" checked>
+                                <label for="card-method">Credit/Debit Card</label>
+                                <input type="radio" name="payment-method" id="upi-method" value="upi">
+                                <label for="upi-method">UPI</label>
+                            </div>
+                        </div>
 
-        function toggleRequired(section, required) {
-            const inputs = section.querySelectorAll('input:not([id="upi-id"])'); // UPI ID is optional
-            inputs.forEach(input => {
-                input.required = required;
-            });
-        }
+                        <!-- Card Payment Section -->
+                        <div class="payment-section" id="card-section">
+                            <div class="inputBox">
+                                <label>Cards Accepted:</label>
+                                <img src="assets/card_img.png" alt="Accepted payment cards (Visa, MasterCard, etc.)">
+                            </div>
+                            <div class="inputBox">
+                                <label for="card-name">Name on Card:</label>
+                                <input type="text" id="card-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="inputBox">
+                                <label for="card-number">Credit Card Number:</label>
+                                <input type="text" id="card-number" placeholder="1111 2222 3333 4444" pattern="[0-9\s]{13,19}" required>
+                            </div>
+                            <div class="inputBox">
+                                <label for="exp-month">Expiration Month:</label>
+                                <input type="text" id="exp-month" placeholder="January" required>
+                            </div>
+                            <div class="flex">
+                                <div class="inputBox">
+                                    <label for="exp-year">Expiration Year:</label>
+                                    <input type="number" id="exp-year" placeholder="2025" min="2025" required>
+                                </div>
+                                <div class="inputBox">
+                                    <label for="cvv">CVV:</label>
+                                    <input type="text" id="cvv" placeholder="123" pattern="[0-9]{3,4}" required>
+                                </div>
+                            </div>
+                        </div>
 
-        // Instant QR code generation
-        const merchantVPA = 'merchant@upi'; // Replace with your actual VPA
-        const merchantName = 'Your Business'; // Replace with your business name
+                        <!-- UPI Payment Section -->
+                        <div class="payment-section" id="upi-section" style="display: none;">
+                            <div class="inputBox">
+                                <label for="bill-amount">Bill Amount (₹):</label>
+                                <input type="number" id="bill-amount" step="0.01" min="1" readonly>
+                            </div>
+                            <div class="inputBox">
+                                <label for="upi-id">UPI ID (Optional):</label>
+                                <input type="text" id="upi-id" placeholder="yourname@upi" pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Enter a valid UPI ID (e.g., yourname@upi)">
+                            </div>
+                            <div class="inputBox">
+                                <label>Scan to Pay:</label>
+                                <div id="upi-qr-code"></div>
+                                <p class="upi-help">Use PhonePe, Google Pay, or any UPI app to scan and pay.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Pay Now</button>
+                <p id="paymentMessage" class="form-message"></p>
+            </form>
+        </div>
+    </section>
 
-        function updateQRCode() {
-            const amount = parseFloat(billAmountInput.value);
-            if (amount >= 1) {
-                const transactionId = 'TXN' + Date.now(); // Unique transaction ID
-                const upiUrl = `upi://pay?pa=${encodeURIComponent(merchantVPA)}&pn=${encodeURIComponent(merchantName)}&am=${amount.toFixed(2)}&cu=INR&tn=Payment%20for%20Bill&tr=${transactionId}`;
-
-                // Clear previous QR code
-                qrCodeDiv.innerHTML = '';
-
-                // Generate new QR code
-                new QRCode(qrCodeDiv, {
-                    text: upiUrl,
-                    width: 150,
-                    height: 150,
-                    colorDark: '#000000',
-                    colorLight: '#ffffff',
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            } else {
-                qrCodeDiv.innerHTML = '<p class="upi-help">Enter a valid amount (₹1 or more) to generate QR code.</p>';
-            }
-        }
-
-        // Update QR code instantly on bill amount change
-        billAmountInput.addEventListener('input', updateQRCode);
-
-        // Initial state (no QR code until amount is entered)
-        qrCodeDiv.innerHTML = '<p class="upi-help">Enter bill amount to generate QR code.</p>';
-
-        // Generate QR code if amount is pre-filled on UPI selection
-        if (billAmountInput.value) {
-            updateQRCode();
-        }
-    </script>
+    <!-- Footer -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Our Branches</h3>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>India</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Kenya</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Canada</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Korea</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Australia</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>France</a>
+            </div>
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="index.html#home"><i class="fas fa-arrow-right"></i>Home</a>
+                <a href="index.html#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a>
+                <a href="index.html#featured"><i class="fas fa-arrow-right"></i>Featured</a>
+                <a href="index.html#reviews"><i class="fas fa-arrow-right"></i>Reviews</a>
+                <a href="index.html#contact"><i class="fas fa-arrow-right"></i>Contact</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a>
+                <a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a>
+                <a href="mailto:amrita.edu@gmail.com"><i class="fas fa-envelope"></i>amrita.edu@gmail.com</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Amritapuri, India 690518</a>
+            </div>
+            <div class="box">
+                <h3>Social Media</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
+                <a href="#"><i class="fab fa-pinterest"></i>Pinterest</a>
+                <a href="#"><i class="fab fa-reddit"></i>Reddit</a>
+            </div>
+        </div>
+    </section>
+    <div class="end">Made by Group-15 | All Rights Reserved ©</div>
 </body>
 </html>
