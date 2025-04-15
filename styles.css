@@ -3,11 +3,11 @@
 
 /* Root Variables */
 :root {
-    --primary: #005f99; /* Deep ocean blue */
-    --secondary: #f4b400; /* Warm amber */
-    --dark: #0a1a2f; /* Rich navy */
-    --light: #f8fafc; /* Crisp white */
-    --accent: #e63946; /* Vibrant coral */
+    --primary: #005f99;
+    --secondary: #f4b400;
+    --dark: #0a1a2f;
+    --light: #f8fafc;
+    --accent: #e63946;
     --border: 0.1rem solid rgba(10, 26, 47, 0.1);
     --shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
     --shadow-hover: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.12);
@@ -188,13 +188,16 @@ section {
 
 .form-container form {
     background: #fff;
-    padding: 3.5rem;
-    border-radius: var(--radius);
+    padding: 3.5rem 4rem;
+    border-radius: 1.5rem;
     box-shadow: var(--shadow);
     max-width: 48rem;
     width: 90%;
     text-align: center;
     animation: slideUp 0.5s ease forwards;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .form-container form h3 {
@@ -208,13 +211,14 @@ section {
 .form-container form .box {
     width: 100%;
     padding: 1.4rem;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     font-size: 1.6rem;
     border: var(--border);
     border-radius: 0.8rem;
     color: var(--dark);
     background: rgba(248, 250, 252, 0.6);
     transition: var(--transition);
+    text-align: left;
 }
 
 .form-container form .box::placeholder {
@@ -232,7 +236,7 @@ section {
     background: var(--gradient);
     color: #fff;
     font-size: 1.7rem;
-    padding: 1.4rem;
+    padding: 1.2rem;
     border-radius: 4rem;
     cursor: pointer;
     box-shadow: var(--shadow);
@@ -246,7 +250,7 @@ section {
 .form-container form p {
     font-size: 1.5rem;
     color: var(--dark);
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .form-container form p a {
