@@ -1,24 +1,31 @@
 /* Import Professional Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
 
-/* Root Variables */
+/* Root Variables - Refined Palette & Effects */
 :root {
-    --primary: #005f99; /* Deep ocean blue */
-    --secondary: #f4b400; /* Warm amber */
-    --dark: #0a1a2f; /* Rich navy */
-    --light: #f8fafc; /* Crisp white */
-    --accent: #e63946; /* Vibrant coral */
-    --border: 0.1rem solid rgba(10, 26, 47, 0.1);
-    --shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.12);
+    --primary: #005f99; /* Deep ocean blue - Kept */
+    --secondary: #f4b400; /* Warm amber - Kept */
+    --dark: #0a1a2f; /* Rich navy - Kept */
+    --light: #f8fafc; /* Crisp white - Kept */
+    --accent: #e63946; /* Vibrant coral - Kept */
+    --text-muted: #64748b; /* Muted text for hints/secondary info */
+    --border-color: rgba(10, 26, 47, 0.15); /* Slightly more visible border */
+    --border-focus: var(--secondary); /* Use secondary color for focus */
+    --border: 0.1rem solid var(--border-color);
+    --shadow: 0 0.4rem 1.5rem rgba(10, 26, 47, 0.06); /* Softer base shadow */
+    --shadow-hover: 0 0.7rem 2rem rgba(10, 26, 47, 0.1); /* Slightly elevated hover shadow */
+    --shadow-focus: 0 0 0 0.3rem rgba(244, 180, 0, 0.25); /* Focus ring shadow */
     --gradient: linear-gradient(135deg, var(--primary) 0%, #0077cc 100%);
-    --radius: 1.2rem;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 1.2rem; /* Consistent border radius */
+    --radius-small: 0.8rem; /* Smaller radius for inputs/inner elements */
+    --radius-large: 4rem; /* Large radius for pills/buttons */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother ease */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Styles */
+/* Base Styles - Enhanced Readability */
 html {
-    font-size: 62.5%;
+    font-size: 62.5%; /* 1rem = 10px */
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
@@ -29,25 +36,40 @@ body {
     padding: 0;
     background: var(--light);
     color: var(--dark);
-    line-height: 1.6;
+    line-height: 1.7; /* Slightly increased line-height for readability */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    outline: none;
+    /* outline: none; removed - rely on focus-visible */
     border: none;
     text-decoration: none;
 }
 
-/* Reusable Components */
+/* Accessibility: Ensure visible focus states for keyboard users */
+:focus-visible {
+    outline: 0.2rem solid var(--border-focus);
+    outline-offset: 0.2rem;
+    box-shadow: var(--shadow-focus);
+    border-radius: var(--radius-small); /* Consistent focus appearance */
+}
+/* Remove outline for mouse interactions, keep for keyboard/programmatic focus */
+*:focus:not(:focus-visible) {
+   outline: none;
+   box-shadow: none;
+}
+
+/* Reusable Components - Enhanced Button */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 1.2rem 3.5rem;
-    border-radius: 4rem;
+    border-radius: var(--radius-large);
     background: var(--gradient);
     color: #fff;
     font-size: 1.7rem;
@@ -57,33 +79,38 @@ body {
     cursor: pointer;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    transform: translateZ(0); /* Promote to own layer for smoother animation */
+    will-change: transform, box-shadow, background; /* Performance hint */
 }
 
 .btn:hover {
-    transform: translateY(-0.2rem);
+    transform: translateY(-0.3rem) scale(1.02); /* Subtle lift and scale */
     background: var(--accent);
     box-shadow: var(--shadow-hover);
+    color: #fff; /* Ensure text remains white on accent bg */
 }
 
 .btn:active {
-    transform: translateY(0);
+    transform: translateY(-0.1rem) scale(1); /* Slight press down effect */
     box-shadow: var(--shadow);
 }
 
-/* Header */
+/* Header - Refined Polish */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
+    backdrop-filter: blur(16px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(16px); /* Safari support */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 5%;
-    box-shadow: var(--shadow);
+    padding: 1.8rem 5%; /* Slightly adjusted padding */
+    box-shadow: 0 0.2rem 0.8rem rgba(10, 26, 47, 0.05); /* More subtle shadow */
+    border-bottom: 0.1rem solid rgba(10, 26, 47, 0.05); /* Subtle bottom border */
 }
 
 .header .logo {
@@ -91,6 +118,10 @@ body {
     font-size: 3.2rem;
     font-weight: 700;
     color: var(--dark);
+    transition: var(--transition-fast);
+}
+.header .logo:hover {
+    opacity: 0.85;
 }
 
 .header .logo span {
@@ -103,25 +134,28 @@ body {
     color: var(--dark);
     font-weight: 500;
     position: relative;
+    padding-bottom: 0.5rem; /* Space for underline */
+    transition: color var(--transition-fast); /* Smooth color transition */
 }
 
 .header .navbar a::after {
     content: '';
     position: absolute;
-    bottom: -0.4rem;
+    bottom: 0; /* Align with padding-bottom */
     left: 0;
     width: 0;
-    height: 0.2rem;
+    height: 0.25rem; /* Slightly thicker underline */
     background: var(--secondary);
-    transition: width 0.3s ease;
+    border-radius: 0.1rem; /* Slightly rounded ends */
+    transition: width 0.3s ease-out; /* Smoother ease-out */
+}
+
+.header .navbar a:hover {
+    color: var(--accent); /* Keep hover color */
 }
 
 .header .navbar a:hover::after {
     width: 100%;
-}
-
-.header .navbar a:hover {
-    color: var(--accent);
 }
 
 .header #login .btn {
@@ -134,27 +168,31 @@ body {
     color: var(--dark);
     cursor: pointer;
     display: none;
+    transition: var(--transition-fast);
+}
+.header #login i:hover {
+    color: var(--accent);
+    transform: scale(1.1);
 }
 
-/* Form Containers */
+/* Form Containers - Smoother Entry */
 .form-container {
     position: fixed;
-    top: 100%;
+    top: 0; /* Start at top for transition */
     left: 0;
     z-index: 1100;
     width: 100%;
     height: 100%;
-    background: rgba(10, 26, 47, 0.85);
+    background: rgba(10, 26, 47, 0.88); /* Slightly darker overlay */
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, top 0s linear 0.4s;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s; /* Standard transition */
 }
 
 .form-container.active {
-    top: 0;
     opacity: 1;
     visibility: visible;
     transition: opacity 0.4s ease;
@@ -162,105 +200,119 @@ body {
 
 .form-container form {
     background: #fff;
-    padding: 3.5rem;
+    padding: 4rem; /* Increased padding */
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-hover); /* More prominent shadow for modal */
     max-width: 48rem;
     width: 90%;
     text-align: center;
-    animation: slideUp 0.5s ease forwards;
+    /* Animation applied via JS adding a class is often better */
+    transform: translateY(2rem) scale(0.98); /* Start slightly down and scaled */
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
 }
+
+.form-container.active form {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* Remove the Keyframes animation if using the transform approach above */
+/* @keyframes slideUp { ... } */
 
 .form-container form h3 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     color: var(--dark);
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem; /* More spacing */
     font-weight: 700;
 }
 
 .form-container form .box {
     width: 100%;
-    padding: 1.4rem;
-    margin: 1rem 0;
+    padding: 1.5rem; /* Increased padding */
+    margin: 1.2rem 0; /* Adjusted margin */
     font-size: 1.6rem;
     border: var(--border);
-    border-radius: 0.8rem;
+    border-radius: var(--radius-small);
     color: var(--dark);
-    background: rgba(248, 250, 252, 0.6);
-    transition: var(--transition);
+    background: rgba(248, 250, 252, 0.8); /* Slightly more opaque bg */
+    transition: var(--transition-fast); /* Faster transition for inputs */
+    appearance: none; /* Reset default browser styles */
+    cursor: text;
 }
 
 .form-container form .box::placeholder {
-    color: rgba(10, 26, 47, 0.5);
+    color: var(--text-muted); /* Muted placeholder */
+    opacity: 1; /* Ensure visible */
 }
 
 .form-container form .box:focus {
-    border-color: var(--secondary);
-    box-shadow: 0 0 0.6rem rgba(244, 180, 0, 0.3);
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-focus); /* Use focus shadow variable */
     background: #fff;
+    outline: none; /* Remove default focus, rely on border/shadow */
 }
 
-.form-container form input[type="submit"] {
+.form-container form input[type="submit"].btn { /* Target the submit button specifically if it uses .btn */
     width: 100%;
-    background: var(--gradient);
-    color: #fff;
+    margin-top: 1.5rem; /* Add space above submit */
+    padding: 1.5rem; /* Consistent padding */
     font-size: 1.7rem;
-    padding: 1.4rem;
-    border-radius: 4rem;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-}
-
-.form-container form input[type="submit"]:hover {
-    background: var(--accent);
-    transform: translateY(-0.2rem);
+    /* Inherits .btn styles, hover/active are handled there */
 }
 
 .form-container form p {
     font-size: 1.5rem;
-    color: var(--dark);
-    margin: 1.5rem 0;
+    color: var(--text-muted); /* Muted text */
+    margin: 2rem 0 0; /* Spacing */
 }
 
 .form-container form p a {
     color: var(--accent);
     font-weight: 600;
     text-decoration: none;
-    border-bottom: 0.1rem solid var(--accent);
+    border-bottom: 0.1rem solid transparent; /* Prepare for underline */
+    transition: var(--transition-fast);
 }
 
 .form-container form p a:hover {
     color: var(--secondary);
-    border-color: var(--secondary);
+    border-color: var(--secondary); /* Underline on hover */
 }
 
-.form-container .fa-times {
+.form-container .fa-times { /* Style the close icon */
     position: absolute;
-    top: 2.5rem;
-    right: 3.5rem;
-    font-size: 3rem;
-    color: #fff;
+    top: 2rem;
+    right: 2.5rem;
+    font-size: 2.8rem; /* Slightly smaller */
+    color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
     cursor: pointer;
+    transition: var(--transition-fast);
+    padding: 0.5rem; /* Easier click target */
+    line-height: 1;
 }
 
 .form-container .fa-times:hover {
     color: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(90deg); /* Add rotation effect */
 }
 
 .form-message {
     font-size: 1.5rem;
-    margin-top: 1rem;
-    display: none;
+    margin-top: 1.5rem; /* More space */
+    color: var(--accent); /* Default to error color */
+    display: none; /* Keep hidden initially */
+    font-weight: 500;
+}
+/* Add classes like .form-message--success for different states */
+.form-message--success {
+    color: #10b981; /* Example success color */
 }
 
-@keyframes slideUp {
-    from { transform: translateY(10rem); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
 
-/* Payment Section */
+/* Payment Section - Enhanced Layout & Clarity */
 .payment {
     padding: 12rem 5% 8rem;
     text-align: center;
@@ -272,46 +324,49 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 5rem;
     color: var(--dark);
-    margin-bottom: 4rem;
+    margin-bottom: 5rem; /* Increased spacing */
     font-weight: 700;
 }
 
 .heading span {
     color: var(--secondary);
     position: relative;
+    display: inline-block; /* Needed for transform origin */
 }
 
 .heading span::after {
     content: '';
     position: absolute;
-    bottom: -0.6rem;
-    left: 50%;
+    bottom: -0.8rem; /* Adjust position */
+    left: 0; /* Start from left */
     width: 0;
     height: 0.3rem;
     background: var(--accent);
-    transform: translateX(-50%);
-    transition: width 0.4s ease;
+    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother, bouncier transition */
+    transform-origin: left; /* Animate width from left */
 }
 
 .heading:hover span::after {
-    width: 50%;
+    width: 100%; /* Underline full span on hover */
 }
 
-.container {
+.container { /* Payment form container */
     max-width: 65rem;
     margin: 0 auto;
     background: #fff;
-    padding: 4rem;
+    padding: 5rem; /* More generous padding */
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     transition: var(--transition);
+    text-align: left; /* Align content left */
 }
 
 .container:hover {
     box-shadow: var(--shadow-hover);
+    transform: translateY(-0.3rem); /* Subtle lift on hover */
 }
 
-form {
+.container form { /* Style form within the container */
     text-align: left;
 }
 
@@ -319,78 +374,104 @@ form {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     color: var(--dark);
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* More spacing */
     font-weight: 700;
+    border-bottom: 0.1rem solid var(--border-color); /* Subtle separator */
+    padding-bottom: 1.5rem;
 }
 
 .inputBox {
-    margin: 1.8rem 0;
+    margin-bottom: 2.5rem; /* Increased spacing */
+    position: relative; /* For potential icon positioning */
 }
 
-.inputBox label {
-    font-size: 1.7rem;
+.inputBox label { /* Using label instead of span for semantics */
+    font-size: 1.6rem; /* Slightly smaller label */
     color: var(--dark);
     display: block;
-    margin-bottom: 0.8rem;
-    font-weight: 500;
+    margin-bottom: 1rem; /* Space between label and input */
+    font-weight: 600; /* Bolder label */
 }
 
-.inputBox span {
+/* If you have static text like "Card Accepted", use a different class or just <p> */
+.inputBox .static-info {
     font-size: 1.7rem;
     color: var(--dark);
     font-weight: 600;
+    display: block; /* Make it block */
+    margin-bottom: 1rem; /* Add spacing */
 }
 
-.inputBox input {
+
+.inputBox input { /* Style all inputs within inputBox */
     width: 100%;
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--dark);
     border: var(--border);
-    border-radius: 0.8rem;
-    background: rgba(248, 250, 252, 0.6);
-    transition: var(--transition);
+    border-radius: var(--radius-small);
+    background: rgba(248, 250, 252, 0.8);
+    transition: var(--transition-fast);
+    appearance: none;
+    cursor: text;
 }
 
 .inputBox input::placeholder {
-    color: rgba(10, 26, 47, 0.5);
+    color: var(--text-muted);
+    opacity: 1;
 }
 
 .inputBox input:focus {
-    border-color: var(--secondary);
-    box-shadow: 0 0 0.6rem rgba(244, 180, 0, 0.3);
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-focus);
     background: #fff;
+    outline: none; /* Handled by :focus-visible */
 }
 
-.inputBox img {
-    height: 3.5rem;
-    margin: 1.2rem 0;
+.inputBox img.card-logos { /* Specific class for card logos */
+    height: 3rem; /* Adjusted height */
+    margin-top: 1rem; /* Space above logos */
+    opacity: 0.8; /* Slightly muted logos */
 }
 
 .payment-method {
-    margin: 2.5rem 0;
+    margin: 3rem 0; /* More vertical space */
 }
 
 .method-toggle {
     display: flex;
-    gap: 2.5rem;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1.5rem; /* Space between options */
     align-items: center;
 }
 
 .method-toggle input[type="radio"] {
-    display: none;
+    /* Keep hidden using more accessible techniques */
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .method-toggle label {
-    font-size: 1.7rem;
+    font-size: 1.6rem; /* Slightly smaller text */
     color: var(--dark);
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.5rem; /* Adjusted padding */
     border: var(--border);
-    border-radius: 4rem;
+    border-radius: var(--radius-large);
     cursor: pointer;
     background: #fff;
-    box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 0.1rem 0.3rem rgba(10, 26, 47, 0.04); /* Softer inset shadow */
     transition: var(--transition);
+    text-align: center;
+    flex-grow: 1; /* Allow labels to grow */
+}
+
+/* Style label when the hidden radio is focused using keyboard */
+.method-toggle input[type="radio"]:focus-visible + label {
+    outline: 0.2rem solid var(--border-focus);
+    outline-offset: 0.2rem;
+    box-shadow: var(--shadow-focus), inset 0 0.1rem 0.3rem rgba(10, 26, 47, 0.04);
 }
 
 .method-toggle input[type="radio"]:checked + label {
@@ -398,46 +479,72 @@ form {
     color: #fff;
     border-color: transparent;
     box-shadow: var(--shadow);
+    font-weight: 600; /* Emphasize selected */
 }
 
 .method-toggle label:hover {
-    color: var(--accent);
+    border-color: var(--secondary);
+    color: var(--primary); /* Change text color on hover */
+    transform: translateY(-0.2rem); /* Slight lift */
+    box-shadow: var(--shadow);
+}
+.method-toggle input[type="radio"]:checked + label:hover {
+    /* Keep selected style, maybe slightly brighter */
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-0.2rem);
+    filter: brightness(1.1);
 }
 
-.payment-section {
-    margin-top: 2.5rem;
+.payment-section { /* Container for specific method details */
+    margin-top: 3rem; /* Space above details */
+    padding-top: 2rem; /* Space inside */
+    border-top: 0.1rem solid var(--border-color); /* Separator */
 }
 
 .flex {
     display: flex;
     gap: 2.5rem;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 .flex .inputBox {
-    flex: 1;
+    flex: 1 1 20rem; /* Allow flexible sizing and wrapping */
+    min-width: 18rem; /* Minimum width before wrapping */
 }
 
 .upi-help {
-    font-size: 1.5rem;
-    color: rgba(10, 26, 47, 0.7);
-    margin-top: 1.2rem;
+    font-size: 1.4rem; /* Smaller help text */
+    color: var(--text-muted);
+    margin-top: 1.5rem;
     line-height: 1.8;
+    background: rgba(248, 250, 252, 0.6); /* Subtle background */
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-small);
+    border: 0.1rem dashed var(--border-color); /* Dashed border for info */
 }
 
 #upi-qr-code {
-    margin: 1.5rem auto;
+    margin: 2rem auto;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
     background: #fff;
-    border-radius: 0.8rem;
+    border-radius: var(--radius-small);
     box-shadow: var(--shadow);
+    max-width: 20rem; /* Limit QR code size */
+    display: block; /* Ensure block display */
+}
+#upi-qr-code img { /* Style the actual QR image if needed */
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
-.submit-btn {
-    display: block;
+.submit-btn { /* Use .btn class for consistency if possible */
+    /* If using .btn class, remove duplicate styles */
+    display: block; /* Already block in original */
     width: 100%;
     padding: 1.5rem;
-    border-radius: 4rem;
+    border-radius: var(--radius-large);
     background: var(--gradient);
     color: #fff;
     font-size: 1.8rem;
@@ -445,85 +552,112 @@ form {
     cursor: pointer;
     text-transform: uppercase;
     box-shadow: var(--shadow);
-    margin-top: 3rem;
+    margin-top: 3.5rem; /* More space above */
     transition: var(--transition);
+    text-align: center; /* Ensure text is centered */
+    transform: translateZ(0);
+    will-change: transform, box-shadow, background;
 }
 
 .submit-btn:hover {
     background: var(--accent);
-    transform: translateY(-0.2rem);
+    transform: translateY(-0.3rem) scale(1.01); /* Consistent hover */
     box-shadow: var(--shadow-hover);
 }
 
 .submit-btn:active {
-    transform: translateY(0);
+    transform: translateY(-0.1rem) scale(1); /* Consistent active */
 }
 
-/* Footer */
+/* Footer - Enhanced Readability & Polish */
 .footer {
     background: var(--dark);
-    color: #e2e8f0;
-    padding: 6rem 5%;
+    color: #cbd5e1; /* Slightly lighter grey for better contrast */
+    padding: 8rem 5% 3rem; /* Adjusted padding */
 }
 
 .footer .box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
-    gap: 3.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); /* Slightly adjusted minmax */
+    gap: 4rem; /* Increased gap */
+    margin-bottom: 5rem; /* Space before credit */
 }
 
 .footer .box h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
+    font-size: 2.6rem; /* Slightly smaller */
     margin-bottom: 2.5rem;
     color: #fff;
+    position: relative;
+    padding-bottom: 1rem;
 }
+/* Add a subtle underline to footer headings */
+.footer .box h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 5rem; /* Fixed width underline */
+    height: 0.2rem;
+    background-color: var(--secondary);
+    opacity: 0.6;
+}
+
 
 .footer .box a {
     display: flex;
     align-items: center;
     font-size: 1.6rem;
-    color: #e2e8f0;
-    padding: 1rem 0;
-    transition: var(--transition);
+    color: #cbd5e1; /* Consistent text color */
+    padding: 1.2rem 0; /* Increased padding for easier clicking */
+    transition: var(--transition-fast); /* Faster transition */
 }
 
 .footer .box a i {
-    margin-right: 1.2rem;
+    margin-right: 1.5rem; /* More space for icon */
     color: var(--secondary);
     font-size: 1.8rem;
+    width: 2rem; /* Ensure consistent icon alignment */
+    text-align: center;
+    transition: var(--transition-fast);
 }
 
 .footer .box a:hover {
-    color: var(--accent);
-    transform: translateX(0.8rem);
+    color: #fff; /* Brighter color on hover */
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle background highlight */
+    transform: translateX(0.5rem); /* Keep subtle translate */
+    padding-left: 0.5rem; /* Indent on hover */
+}
+.footer .box a:hover i {
+    color: var(--accent); /* Change icon color on hover */
 }
 
-.end {
+.end { /* Credit section */
     text-align: center;
-    padding: 2.5rem;
+    padding-top: 3rem; /* Increased padding top */
     font-size: 1.5rem;
-    background: var(--dark);
-    color: #e2e8f0;
+    background: var(--dark); /* Ensure same bg */
+    color: var(--text-muted); /* Muted color for credit */
     border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
 }
+.end span { /* Maybe highlight your name/brand */
+    color: var(--secondary);
+    font-weight: 500;
+}
 
-/* Media Queries */
+
+/* Media Queries - Adjusting Breakpoints and Styles */
 @media (max-width: 1200px) {
-    html { font-size: 58%; }
-    .payment { padding: 10rem 4% 6rem; }
+    html { font-size: 60%; } /* Slightly larger base */
+    .payment { padding: 10rem 4% 7rem; }
+    .container { padding: 4rem; }
 }
 
 @media (max-width: 991px) {
-    html { font-size: 55%; }
-    .payment { padding: 9rem 3% 5rem; }
-}
-
-@media (max-width: 768px) {
-    .header #login i { display: block; }
-    .header #login .btn { display: none; }
-
+    html { font-size: 58%; }
+    .header { padding: 1.5rem 4%; }
     .header .navbar {
+        /* Mobile Nav Styles - Ensure transitions */
         position: absolute;
         top: 100%;
         left: 0;
@@ -531,6 +665,7 @@ form {
         background: #fff;
         box-shadow: var(--shadow);
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.4s ease-in-out; /* Smooth dropdown */
     }
 
     .header .navbar.active {
@@ -539,18 +674,72 @@ form {
 
     .header .navbar a {
         display: block;
-        margin: 2.5rem 3rem;
-        font-size: 2rem;
+        margin: 0; /* Remove horizontal margin */
+        padding: 2rem 4%; /* Use padding */
+        font-size: 1.8rem; /* Slightly smaller */
+        border-bottom: 1px solid var(--border-color); /* Separator */
+    }
+    .header .navbar a:last-child {
+        border-bottom: none;
+    }
+    .header .navbar a::after { /* Hide underline on mobile */
+        display: none;
+    }
+    .header .navbar a:hover {
+        background-color: rgba(10, 26, 47, 0.03); /* Subtle hover background */
+        color: var(--accent); /* Keep accent color */
     }
 
-    .flex { flex-direction: column; gap: 1.5rem; }
-    .container { padding: 3rem; }
+    .header #login i { display: block; } /* Keep hamburger */
+    .header #login .btn { display: none; } /* Hide login button */
+
+    .payment { padding: 9rem 3% 6rem; }
+    .heading { font-size: 4.5rem; }
 }
 
-@media (max-width: 450px) {
-    html { font-size: 50%; }
-    .heading { font-size: 4rem; }
+@media (max-width: 768px) {
+    html { font-size: 55%; }
+    .container { padding: 3.5rem; } /* Adjust padding */
+    .title { font-size: 2.8rem; } /* Adjust title size */
+
+    .flex {
+        flex-direction: column; /* Stack elements */
+        gap: 0; /* Remove gap, rely on inputBox margin */
+    }
+    .flex .inputBox {
+         /* Full width when stacked */
+        min-width: 100%;
+        margin-bottom: 2rem; /* Ensure spacing when stacked */
+    }
+    .footer .box-container { grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)); gap: 3rem;}
+}
+
+@media (max-width: 480px) { /* Changed breakpoint from 450 for common devices */
+    html { font-size: 52%; }
+    .header { padding: 1.5rem 3%; }
+    .header .logo { font-size: 2.8rem; }
+    .heading { font-size: 3.6rem; margin-bottom: 4rem; }
     .container { padding: 2.5rem; }
-    .method-toggle { flex-direction: column; align-items: flex-start; }
-    .method-toggle label { width: 100%; text-align: center; }
+    .title { font-size: 2.5rem; }
+    .form-container form { padding: 3rem; }
+
+    .method-toggle {
+         /* Keep flex for better control */
+        gap: 1rem; /* Reduce gap */
+    }
+    .method-toggle label {
+        width: 100%; /* Make labels full width */
+        text-align: center;
+        padding: 1.2rem 1.5rem; /* Adjust padding */
+        font-size: 1.5rem;
+    }
+
+    .btn, .submit-btn { /* Adjust button padding */
+        padding: 1.4rem 3rem;
+        font-size: 1.6rem;
+    }
+    .footer .box-container { grid-template-columns: 1fr; gap: 2.5rem; } /* Stack footer boxes */
+    .footer .box h3 { font-size: 2.4rem; }
+    .footer { padding: 6rem 5% 2rem; }
+    .end { padding: 2.5rem; font-size: 1.4rem;}
 }
