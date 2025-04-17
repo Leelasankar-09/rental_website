@@ -10,52 +10,42 @@
     --gray: #64748b;         /* Mid Gray - Body Text, Subtle Elements */
     --light-gray: #e2e8f0;   /* Light Gray - Borders, Backgrounds */
     --accent: #e63946;       /* Red - Attention, Hover States (used sparingly) */
-
     --border-radius-sm: 0.6rem;
     --border-radius-md: 1.2rem;
     --border-radius-lg: 2.0rem;
     --border-radius-pill: 5rem;
-
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.12);
-
     --gradient: linear-gradient(135deg, var(--primary) 0%, #0077cc 100%);
     --gradient-hover: linear-gradient(135deg, #0077cc 0%, var(--primary) 100%);
-
     --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-std: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Custom Scrollbar - Subtle & Themed */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
-
 ::-webkit-scrollbar-track {
     background: var(--light);
     border-radius: 5px;
 }
-
 ::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 5px;
-    border: 2px solid var(--light); /* Creates a nice inset effect */
+    border: 2px solid var(--light); 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0077cc; /* Slightly lighter blue on hover */
+    background: #0077cc;
 }
-
-/* Base Styles & Reset */
 html {
-    font-size: 62.5%; /* 1rem = 10px */
+    font-size: 62.5%;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    scroll-padding-top: 8rem; /* Adjust for fixed header */
+    scroll-padding-top: 8rem; 
 }
 
 body {
@@ -64,7 +54,7 @@ body {
     padding: 0;
     background-color: var(--light);
     color: var(--dark);
-    line-height: 1.7; /* Improved readability */
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -79,7 +69,7 @@ body {
 }
 
 section {
-    padding: 8rem 5%; /* Increased padding for more breathing room */
+    padding: 8rem 5%; 
     max-width: 1440px; /* Max container width */
     margin: 0 auto; /* Center content */
 }
