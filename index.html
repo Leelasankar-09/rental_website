@@ -3,185 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vroom - Car & Bike Rentals</title>
+    <title>Vroom - Modern Car & Bike Rentals</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
-    <!-- Header -->
+
     <header class="header">
-        <a href="#" class="logo"><span>Vr</span>oom</a>
-        <nav class="navbar"> 
+        <a href="#home" class="logo"><span>Vr</span>oom</a>
+        <nav class="navbar">
             <a href="#home">Home</a>
             <a href="#vehicles">Vehicles</a>
-            <a href="#reviews">Reviews</a>
+             <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
         </nav>
         <div id="login">
-            <button class="btn">Login</button>
-            <i class="far fa-user"></i>
+             <button class="btn">Login</button>
+            <i class="fas fa-user"></i>
+             <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
         </div>
     </header>
 
-    <!-- Login Form -->
-    <div class="login-form-container">
-        <span class="fas fa-times" id="close-login-form"></span>
-        <form id="loginForm">
-            <h3>User Login</h3>
-            <input type="text" id="loginUsername" placeholder="Enter Username here" class="box">
-            <input type="password" id="loginPassword" placeholder="Enter Password here" class="box">
-            <input type="submit" value="Login now" class="btn">
+    <div class="login-form-container form-container">
+        <span class="fas fa-times" id="close-login-form" aria-label="Close login form"></span>
+         <form id="loginForm" aria-labelledby="login-heading">
+             <h3 id="login-heading">User Login</h3>
+            <div class="inputBox">
+                 <label for="loginUsername">Username:</label>
+                 <input type="text" id="loginUsername" placeholder="Enter Username here" class="box" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                 <label for="loginPassword">Password:</label>
+                 <input type="password" id="loginPassword" placeholder="Enter Password here" class="box" required aria-required="true">
+            </div>
+             <button type="submit" class="btn">Login now</button>
             <p>Don't have an account? <a href="#" id="signupLink">Create One</a></p>
-            <p id="loginMessage" class="form-message"></p>
+             <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
         </form>
     </div>
 
-    <!-- Signup Form -->
-    <div class="sign-form-container">
-        <span class="fas fa-times" id="close-sign-form"></span>
-        <form id="signupForm">
-            <h3>User Signup</h3>
-            <input type="email" id="signupEmail" placeholder="Enter E-mail here" class="box">
-            <input type="text" id="signupName" placeholder="Enter your Name here" class="box">
-            <input type="text" id="signupUsername" placeholder="Enter your Username here" class="box">
-            <input type="password" id="signupPassword" placeholder="Enter Password here" class="box">
-            <input type="password" id="signupConfirmPassword" placeholder="Retype Password" class="box">
-            <input type="submit" value="Signup" class="btn">
-            <p id="signupMessage" class="form-message"></p>
+    <div class="sign-form-container form-container">
+         <span class="fas fa-times" id="close-sign-form" aria-label="Close signup form"></span>
+         <form id="signupForm" aria-labelledby="signup-heading">
+             <h3 id="signup-heading">User Signup</h3>
+             <div class="inputBox">
+                 <label for="signupEmail">Email:</label>
+                 <input type="email" id="signupEmail" placeholder="Enter E-mail here" class="box" required aria-required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+            </div>
+             <div class="inputBox">
+                 <label for="signupName">Full Name:</label>
+                 <input type="text" id="signupName" placeholder="Enter your Name here" class="box" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                <label for="signupUsername">Username:</label>
+                 <input type="text" id="signupUsername" placeholder="Enter your Username here" class="box" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                <label for="signupPassword">Password:</label>
+                 <input type="password" id="signupPassword" placeholder="Enter Password here" class="box" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                <label for="signupConfirmPassword">Confirm Password:</label>
+                 <input type="password" id="signupConfirmPassword" placeholder="Retype Password" class="box" required aria-required="true">
+            </div>
+             <button type="submit" class="btn">Signup</button>
+             <p id="signupMessage" class="form-message" role="status" aria-live="polite"></p>
         </form>
     </div>
 
-    <!-- Home Section -->
-    <section class="home" id="home">
-        <h1 class="home-parallax" data-speed="-2">Find Your Ride</h1>
-        <img src="assets/pic1.png" alt="Ride" class="home-parallax" data-speed="5">
-        <a href="#vehicles" class="btn home-parallax" data-speed="7">Explore Rides</a>
-    </section>
+    <main>
+        <section class="home" id="home">
+             <h1 data-speed="-2">Find Your Ride</h1>
+             <img src="assets/pic1.png" alt="Hero image featuring a car or bike" data-speed="5">
+             <a href="#vehicles" class="btn" data-speed="7">Explore Rides</a>
+        </section>
 
-    <!-- Icons Container -->
-    <section class="icons-container">
-        <div class="icons">
-            <i class="fas fa-home"></i>
-            <div class="content">
-                <h3>150+</h3>
-                <p>Branches</p>
+        <section class="icons-container">
+             <div class="icons">
+                <i class="fas fa-home"></i>
+                <div class="content">
+                    <h3>150+</h3>
+                    <p>Branches</p>
+                </div>
             </div>
-        </div>
-        <div class="icons">
-            <i class="fas fa-car"></i>
-            <div class="content">
-                <h3>100+</h3>
-                <p>Vehicles Rented</p>
+            <div class="icons">
+                <i class="fas fa-car"></i>
+                <div class="content">
+                    <h3>100+</h3>
+                    <p>Vehicles Rented Daily</p> </div>
             </div>
-        </div>
-        <div class="icons">
-            <i class="fas fa-users"></i>
-            <div class="content">
-                <h3>100+</h3>
-                <p>Happy Clients</p>
+            <div class="icons">
+                <i class="fas fa-users"></i>
+                <div class="content">
+                    <h3>100+</h3>
+                    <p>Happy Clients</p>
+                </div>
             </div>
-        </div>
-        <div class="icons">
-            <i class="fas fa-car"></i>
-            <div class="content">
-                <h3>1000+</h3>
-                <p>New Vehicles</p>
+            <div class="icons">
+                <i class="fas fa-car-side"></i> <div class="content">
+                    <h3>1000+</h3>
+                    <p>Vehicles Available</p> </div>
             </div>
-        </div>
-        <div class="icons">
-            <i class="fas fa-cog"></i>
-            <div class="content">
-                <h3></h3>
-                <p>Fully Serviced</p>
+            <div class="icons">
+                 <i class="fas fa-tools"></i> <div class="content">
+                     <h3><i class="fas fa-check-circle"></i></h3> <p>Fully Serviced Fleet</p> </div>
             </div>
-        </div>
-        <div class="icons"> 
-            <i class="fas fa-fire"></i>
-            <div class="content">
-                <h3></h3>
-                <p>Exclusive Insurance</p>
+            <div class="icons">
+                 <i class="fas fa-shield-alt"></i> <div class="content">
+                     <h3><i class="fas fa-percent"></i> 100%</h3> <p>Comprehensive Insurance</p> </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Vehicles Section -->
-    <section class="vehicle" id="vehicles">
-        <h1 class="heading">Popular <span>Vehicles</span></h1>
-        <div class="vehicle-toggle">
-            <input type="radio" id="bikes" name="vehicle-type" checked>
-            <label for="bikes">Bikes</label>
-            <input type="radio" id="cars" name="vehicle-type">
-            <label for="cars">Cars</label>
-        </div>
-        <div id="bikes-slider" class="swiper featured-slider">
-            <div class="swiper-wrapper">
-                <!-- Bikes populated by JS -->
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div id="cars-slider" class="swiper featured-slider" style="display: none;">
-            <div class="swiper-wrapper">
-                <!-- Cars populated by JS -->
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
+        <section class="vehicle" id="vehicles">
+            <h1 class="heading">Popular <span>Vehicles</span></h1>
+            <div class="vehicle-toggle" role="tablist"> <input type="radio" id="bikes-toggle" name="vehicle-type" checked aria-controls="bikes-slider">
+                <label for="bikes-toggle" role="tab" aria-selected="true" id="bikes-tab">Bikes</label>
 
-    <!-- Featured Section -->
-    <section class="featured" id="featured">
-        <h1 class="heading"><span>Featured</span> Vehicles</h1>
-        <div class="vehicle-toggle">
-            <input type="radio" id="featured-bikes" name="featured-vehicle-type" checked>
-            <label for="featured-bikes">Bikes</label>
-            <input type="radio" id="featured-cars" name="featured-vehicle-type">
-            <label for="featured-cars">Cars</label>
-        </div>
-        <div id="featured-bikes-slider" class="swiper featured-slider">
-            <div class="swiper-wrapper">
-                <!-- Featured bikes populated by JS -->
+                 <input type="radio" id="cars-toggle" name="vehicle-type" aria-controls="cars-slider">
+                <label for="cars-toggle" role="tab" aria-selected="false" id="cars-tab">Cars</label>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div id="featured-cars-slider" class="swiper featured-slider" style="display: none;">
-            <div class="swiper-wrapper">
-                <!-- Featured cars populated by JS -->
+
+             <div id="bikes-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="bikes-tab"> <div class="swiper-wrapper">
+                    <div class="swiper-slide box">
+                         <img src="assets/bike-1.png" alt="Royal Enfield Classic 350">
+                         <div class="content">
+                             <h3>Royal Enfield Classic 350</h3>
+                             <div class="price">₹ 800<span>/day</span></div>
+                              <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-check-circle"></span> Mileage: 40 km/l
+                                 <span class="fas fa-check-circle"></span> Manual
+                             </p>
+                             <a href="payment.html?type=bike&vehicle=Royal%20Enfield%20Classic%20350&price=800" class="btn">Rent Now</a> </div>
+                     </div>
+                     <div class="swiper-slide box">
+                         <img src="assets/bike-2.png" alt="Bajaj Pulsar 150">
+                         <div class="content">
+                             <h3>Bajaj Pulsar 150</h3>
+                             <div class="price">₹ 600<span>/day</span></div>
+                              <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-check-circle"></span> Mileage: 50 km/l
+                                 <span class="fas fa-check-circle"></span> Manual
+                             </p>
+                              <a href="payment.html?type=bike&vehicle=Bajaj%20Pulsar%20150&price=600" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                      <div class="swiper-slide box">
+                         <img src="assets/bike-3.png" alt="KTM Duke 200">
+                         <div class="content">
+                             <h3>KTM Duke 200</h3>
+                             <div class="price">₹ 900<span>/day</span></div>
+                              <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-check-circle"></span> Mileage: 35 km/l
+                                 <span class="fas fa-check-circle"></span> Manual
+                             </p>
+                              <a href="payment.html?type=bike&vehicle=KTM%20Duke%20200&price=900" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                      <div class="swiper-slide box">
+                         <img src="assets/bike-4.png" alt="Honda CB Shine">
+                         <div class="content">
+                             <h3>Honda CB Shine</h3>
+                             <div class="price">₹ 500<span>/day</span></div>
+                              <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-check-circle"></span> Mileage: 65 km/l
+                                 <span class="fas fa-check-circle"></span> Manual
+                             </p>
+                              <a href="payment.html?type=bike&vehicle=Honda%20CB%20Shine&price=500" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                     </div>
+                 <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter">
-        <h3>Subscribe for Latest Updates</h3>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        <form action="">
-            <input type="email" placeholder="Enter your email" class="box">
-            <input type="submit" value="Subscribe" class="btn">
-        </form>
-    </section>
+             <div id="cars-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="cars-tab" hidden> <div class="swiper-wrapper">
+                     <div class="swiper-slide box">
+                         <img src="assets/car-1.png" alt="Maruti Suzuki Swift">
+                         <div class="content">
+                             <h3>Maruti Suzuki Swift</h3>
+                             <div class="price">₹ 1200<span>/day</span></div>
+                             <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-tachometer-alt"></span> 20k km
+                                 <span class="fas fa-car"></span> 2019
+                                 <span class="fas fa-gas-pump"></span> Petrol
+                                 <span class="fas fa-road"></span> Automatic
+                             </p>
+                             <a href="payment.html?type=car&vehicle=Maruti%20Suzuki%20Swift&price=1200" class="btn">Rent Now</a> </div>
+                     </div>
+                      <div class="swiper-slide box">
+                         <img src="assets/car-2.png" alt="Hyundai Creta">
+                         <div class="content">
+                             <h3>Hyundai Creta</h3>
+                             <div class="price">₹ 1800<span>/day</span></div>
+                             <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-tachometer-alt"></span> 15k km
+                                 <span class="fas fa-car"></span> 2020
+                                 <span class="fas fa-gas-pump"></span> Diesel
+                                 <span class="fas fa-road"></span> Manual
+                             </p>
+                              <a href="payment.html?type=car&vehicle=Hyundai%20Creta&price=1800" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                      <div class="swiper-slide box">
+                         <img src="assets/car-3.png" alt="Kia Seltos">
+                         <div class="content">
+                             <h3>Kia Seltos</h3>
+                             <div class="price">₹ 1900<span>/day</span></div>
+                             <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-tachometer-alt"></span> 10k km
+                                 <span class="fas fa-car"></span> 2021
+                                 <span class="fas fa-gas-pump"></span> Petrol
+                                 <span class="fas fa-road"></span> Automatic
+                             </p>
+                              <a href="payment.html?type=car&vehicle=Kia%20Seltos&price=1900" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                      <div class="swiper-slide box">
+                         <img src="assets/car-4.png" alt="Mahindra XUV700">
+                         <div class="content">
+                             <h3>Mahindra XUV700</h3>
+                             <div class="price">₹ 2500<span>/day</span></div>
+                             <p>
+                                 <span class="fas fa-check-circle"></span> Available
+                                 <span class="fas fa-tachometer-alt"></span> 8k km
+                                 <span class="fas fa-car"></span> 2022
+                                 <span class="fas fa-gas-pump"></span> Diesel
+                                 <span class="fas fa-road"></span> Manual
+                             </p>
+                              <a href="payment.html?type=car&vehicle=Mahindra%20XUV700&price=2500" class="btn">Rent Now</a>
+                         </div>
+                     </div>
+                     </div>
+                 <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+             </section>
 
-    <!-- Reviews -->
-    <section class="reviews" id="reviews">
-        <h1 class="heading">Client's <span>Review</span></h1>
-        <div class="reviews-slider">
-            <div class="wrapper">
-                <div class="rowe">
-                    <div class="box">
-                        <img src="assets/p1.jpeg" alt="">
+
+        <section class="newsletter">
+             <h3 id="newsletter-heading">Subscribe for Latest Updates</h3>
+             <p>Stay informed about new vehicles, special offers, and rental tips.</p>
+             <form action="" aria-labelledby="newsletter-heading">
+                 <label for="newsletterEmail" class="visually-hidden">Enter your email address</label>
+                 <input type="email" id="newsletterEmail" placeholder="Enter your email" class="box" required aria-required="true">
+                 <button type="submit" class="btn">Subscribe</button>
+                 </form>
+        </section>
+
+        <section class="reviews" id="reviews">
+            <h1 class="heading">Client's <span>Review</span></h1>
+             <div class="reviews-slider swiper">
+                 <div class="swiper-wrapper">
+                    <div class="swiper-slide box">
+                         <img src="assets/p1.jpeg" alt="Client photo of Rahul Sharma">
                         <div class="content">
-                            <p>Amazing bikes, smooth booking process!</p>
+                             <p>Vroom exceeded my expectations! The bikes were amazing, and the booking process was incredibly smooth. Highly recommend!</p>
                             <h3>Rahul Sharma</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
+                            <div class="stars" aria-label="4.5 out of 5 stars"> <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -189,12 +277,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box">
-                        <img src="assets/p2.jpeg" alt="">
+                    <div class="swiper-slide box">
+                         <img src="assets/p2.jpeg" alt="Client photo of Priya Menon">
                         <div class="content">
-                            <p>Loved the car variety, great service!</p>
+                            <p>The variety of cars available is fantastic! I found the perfect ride for my trip. Great service from pick-up to drop-off.</p>
                             <h3>Priya Menon</h3>
-                            <div class="stars">
+                            <div class="stars" aria-label="5 out of 5 stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -203,12 +291,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box">
-                        <img src="assets/p3.jpeg" alt="">
+                    <div class="swiper-slide box">
+                         <img src="assets/p3.jpeg" alt="Client photo of Arjun Reddy">
                         <div class="content">
-                            <p>Super easy to rent, bikes in top condition.</p>
+                            <p>Super easy to rent a bike. The vehicle was in top condition and the staff was very helpful. Will definitely rent again!</p>
                             <h3>Arjun Reddy</h3>
-                            <div class="stars">
+                            <div class="stars" aria-label="4.5 out of 5 stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -217,14 +305,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="rowe">
-                    <div class="box">
-                        <img src="assets/p4.jpeg" alt="">
+                     <div class="swiper-slide box">
+                         <img src="assets/p4.jpeg" alt="Client photo of Sneha Patil">
                         <div class="content">
-                            <p>Cars were clean and reliable!</p>
+                            <p>The cars were clean, reliable, and perfect for a family trip. Vroom made the rental part completely stress-free.</p>
                             <h3>Sneha Patil</h3>
-                            <div class="stars">
+                            <div class="stars" aria-label="4.5 out of 5 stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -233,12 +319,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box">
-                        <img src="assets/p5.jpeg" alt="">
+                     <div class="swiper-slide box">
+                         <img src="assets/p5.jpeg" alt="Client photo of Vikram Singh">
                         <div class="content">
-                            <p>Best rental experience in Hyderabad!</p>
+                            <p>Best rental experience in Hyderabad! Quick service and a wide selection of vehicles. Highly recommended for anyone needing a ride.</p>
                             <h3>Vikram Singh</h3>
-                            <div class="stars">
+                            <div class="stars" aria-label="5 out of 5 stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -247,12 +333,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box">
-                        <img src="assets/p6.jpeg" alt="">
+                    <div class="swiper-slide box">
+                         <img src="assets/p6.jpeg" alt="Client photo of Ananya Rao">
                         <div class="content">
-                            <p>Affordable bikes, great support.</p>
+                            <p>Vroom offers affordable bikes without compromising on quality. The support team was also very helpful when I had questions.</p>
                             <h3>Ananya Rao</h3>
-                            <div class="stars">
+                            <div class="stars" aria-label="4.5 out of 5 stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -262,66 +348,84 @@
                         </div>
                     </div>
                 </div>
+                 <div class="swiper-pagination"></div>
+                 </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h1 class="heading"><span>Contact</span> Us</h1>
+            <div class="row">
+                 <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.628433726432!2d76.48820337593224!3d9.963693173671637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b088266b436896b%3A0xf059f697c0814d97!2sAmritapuri%2C%20Kerala%20690525!5e0!3m2!1sen!2sin!4v1713356902800!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" title="Google Map showing location of Amritapuri, India" aria-label="Google Map showing location of Amritapuri, India"></iframe>
+                 <form action="" aria-labelledby="contact-heading">
+                    <h3 id="contact-heading">Get in Touch</h3>
+                    <div class="inputBox">
+                         <label for="contactName" class="visually-hidden">Name</label>
+                         <input type="text" id="contactName" placeholder="Name" class="box" required aria-required="true">
+                    </div>
+                     <div class="inputBox">
+                         <label for="contactEmail" class="visually-hidden">Email</label>
+                         <input type="email" id="contactEmail" placeholder="Email" class="box" required aria-required="true">
+                    </div>
+                    <div class="inputBox">
+                         <label for="contactNumber" class="visually-hidden">Number</label>
+                         <input type="text" id="contactNumber" placeholder="Phone Number" class="box" required aria-required="true" pattern="[0-9]{10,15}" title="Enter a valid phone number (10-15 digits)">
+                    </div>
+                    <div class="inputBox">
+                         <label for="contactMessage" class="visually-hidden">Message</label>
+                         <textarea id="contactMessage" placeholder="Message" class="box" cols="30" rows="10" required aria-required="true"></textarea>
+                    </div>
+                     <button type="submit" class="btn">Send Message</button>
+                     </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <h1 class="heading"><span>Contact</span> Us</h1>
-        <div class="row">
-            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3939.6684481865404!2d76.4918194!3d9.093937!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0602e7b4a2049d%3A0x3af3246b5138db0f!2sAmrita%20Vishwa%20Vidyapeetham%2C%20Amritapuri!5e0!3m2!1sen!2sin!4v1715104480625!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <form action="">
-                <h3>Get in Touch</h3>
-                <input type="text" placeholder="Name" class="box">
-                <input type="email" placeholder="Email" class="box">
-                <input type="number" placeholder="Number" class="box">
-                <textarea placeholder="Message" class="box" cols="30" rows="10"></textarea>
-                <input type="submit" value="Send Message" class="btn">
-            </form>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <section class="footer">
-        <div class="box-container">
-            <div class="box">
+    <footer class="footer">
+         <div class="box-container">
+             <div class="box">
                 <h3>Our Branches</h3>
-                <a href="#"><i class="fas fa-map-marker-alt"></i>India</a>
+                 <a href="#"><i class="fas fa-map-marker-alt"></i>India</a>
                 <a href="#"><i class="fas fa-map-marker-alt"></i>Kenya</a>
                 <a href="#"><i class="fas fa-map-marker-alt"></i>Canada</a>
                 <a href="#"><i class="fas fa-map-marker-alt"></i>Korea</a>
                 <a href="#"><i class="fas fa-map-marker-alt"></i>Australia</a>
                 <a href="#"><i class="fas fa-map-marker-alt"></i>France</a>
             </div>
-            <div class="box">
+             <div class="box">
                 <h3>Quick Links</h3>
-                <a href="#home"><i class="fas fa-arrow-right"></i>Home</a>
+                 <a href="#home"><i class="fas fa-arrow-right"></i>Home</a>
                 <a href="#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a>
-                <a href="#featured"><i class="fas fa-arrow-right"></i>Featured</a>
                 <a href="#reviews"><i class="fas fa-arrow-right"></i>Reviews</a>
                 <a href="#contact"><i class="fas fa-arrow-right"></i>Contact</a>
-            </div>
-            <div class="box">
+                 </div>
+             <div class="box">
                 <h3>Contact Info</h3>
-                <a href="#"><i class="fas fa-phone"></i>+91 455 545 1254</a>
-                <a href="#"><i class="fas fa-phone"></i>+45 2222 4455 4578</a>
-                <a href="#"><i class="fas fa-envelope"></i>amrita.edu@gmail.com</a>
-                <a href="#"><i class="fas fa-map-marker-alt"></i>Amritapuri, India 690518</a>
+                 <a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a>
+                <a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a>
+                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i>your.email@example.com</a>
+                 <a href="#"><i class="fas fa-map-marker-alt"></i>Your City, India 123456</a>
             </div>
-            <div class="box">
+             <div class="box">
                 <h3>Social Media</h3>
-                <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+                 <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
                 <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
                 <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
-                <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                <a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
                 <a href="#"><i class="fab fa-pinterest"></i>Pinterest</a>
+                 <a href="#"><i class="fab fa-reddit"></i>Reddit</a>
             </div>
         </div>
-    </section>
-    <div class="end">Made by Group-15 | All rights reserved ©</div>
+         <div class="credit">Made by Group-15 | All rights reserved © 2025</div>
+    </footer>
+
+    <style>.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }</style>
+
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+
 </body>
 </html>
