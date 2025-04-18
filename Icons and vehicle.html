@@ -3,127 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Vroom Sections Snippet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    </head>
 <body>
+
     <section class="icons-container">
-        <div class="icons">
-            <i class="fas fa-home"></i>
-            <div class="content">
+         <div class="icons">
+            <i class="fas fa-home"></i> <div class="content">
                 <h3>150+</h3>
-                <p>branches</p>
-            </div>
+                <p>Branches Globally</p> </div>
         </div>
-
         <div class="icons">
-            <i class="fas fa-car"></i>
-            <div class="content">
-                <h3>4770+</h3>
-                <p>cars sold</p>
-            </div>
+            <i class="fas fa-motorcycle"></i> <div class="content">
+                 <h3>4770+</h3>
+                <p>Bikes Rented</p> </div>
         </div>
-
         <div class="icons">
-            <i class="fas fa-users"></i>
-            <div class="content">
-                <h3>590+</h3>
-                <p>happy clients</p>
+            <i class="fas fa-users"></i> <div class="content">
+                 <h3>590+</h3>
+                <p>Happy Clients</p>
             </div>
         </div>
-
         <div class="icons">
-            <i class="fas fa-car"></i>
-            <div class="content">
-                <h3>890+</h3>
-                <p>new cars</p>
-            </div>
+            <i class="fas fa-car"></i> <div class="content">
+                 <h3>890+</h3>
+                <p>Cars Rented</p> </div>
         </div>
+         <div class="icons">
+             <i class="fas fa-tools"></i> <div class="content">
+                  <h3><i class="fas fa-check-circle"></i></h3> <p>Fully Serviced Fleet</p>
+             </div>
+         </div>
+         <div class="icons">
+             <i class="fas fa-shield-alt"></i> <div class="content">
+                  <h3><i class="fas fa-percent"></i> 100%</h3> <p>Comprehensive Insurance</p>
+             </div>
+         </div>
     </section>
 
-    <!-- vehicle section begins -->
     <section class="vehicle" id="vehicles">
-        <h1 class="heading"> popular<span>vehicles</span></h1>
-        <div class="vehicles-slider">
-            <div class="wrapper">
-                <div class="box">
-                    <img src="image1" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
-                </div>
+        <h1 class="heading">Popular <span>Vehicles</span></h1>
 
-                <div class="box">
-                    <img src="image2" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
-                </div>
+        <div class="vehicle-toggle" role="tablist">
+            <input type="radio" id="bikes-toggle" name="vehicle-type" checked aria-controls="bikes-slider">
+            <label for="bikes-toggle" role="tab" aria-selected="true" id="bikes-tab">Bikes</label>
 
-                <div class="box">
-                    <img src="image3" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
-                </div>
+            <input type="radio" id="cars-toggle" name="vehicle-type" aria-controls="cars-slider">
+            <label for="cars-toggle" role="tab" aria-selected="false" id="cars-tab">Cars</label>
+        </div>
 
-                <div class="box">
-                    <img src="image4" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
+        <div id="bikes-slider" class="swiper vehicle-slider" role="tabpanel" aria-labelledby="bikes-tab">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <img src="assets/bike-1.png" alt="Royal Enfield Classic 350">
+                    <div class="content">
+                        <h3>Royal Enfield Classic 350</h3>
+                        <div class="price">₹ 800<span>/day</span></div>
+                        <p>
+                            <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 40 km/l
+                             <span class="fas fa-cogs"></span> Manual
+                        </p>
+                        <a href="payment.html?type=bike&vehicle=Royal%20Enfield%20Classic%20350&price=800" class="btn">Rent Now</a>
+                    </div>
                 </div>
+                <div class="swiper-slide box">
+                    <img src="assets/bike-2.png" alt="Bajaj Pulsar 150">
+                    <div class="content">
+                        <h3>Bajaj Pulsar 150</h3>
+                        <div class="price">₹ 600<span>/day</span></div>
+                        <p>
+                            <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 50 km/l
+                             <span class="fas fa-cogs"></span> Manual
+                        </p>
+                         <a href="payment.html?type=bike&vehicle=Bajaj%20Pulsar%20150&price=600" class="btn">Rent Now</a>
+                    </div>
+                </div>
+                 <div class="swiper-slide box">
+                     <img src="assets/bike-3.png" alt="KTM Duke 200">
+                     <div class="content">
+                         <h3>KTM Duke 200</h3>
+                         <div class="price">₹ 900<span>/day</span></div>
+                         <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 35 km/l
+                             <span class="fas fa-cogs"></span> Manual
+                         </p>
+                          <a href="payment.html?type=bike&vehicle=KTM%20Duke%20200&price=900" class="btn">Rent Now</a>
+                     </div>
+                 </div>
+                 <div class="swiper-slide box">
+                     <img src="assets/bike-4.png" alt="Honda CB Shine">
+                     <div class="content">
+                         <h3>Honda CB Shine</h3>
+                         <div class="price">₹ 500<span>/day</span></div>
+                         <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 65 km/l
+                             <span class="fas fa-cogs"></span> Manual
+                         </p>
+                          <a href="payment.html?type=bike&vehicle=Honda%20CB%20Shine&price=500" class="btn">Rent Now</a>
+                     </div>
+                 </div>
+                </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
 
-                <div class="box">
-                    <img src="image5" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
+        <div id="cars-slider" class="swiper vehicle-slider" role="tabpanel" aria-labelledby="cars-tab" hidden>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <img src="assets/car-1.png" alt="Maruti Suzuki Swift">
+                    <div class="content">
+                        <h3>Maruti Suzuki Swift</h3>
+                        <div class="price">₹ 1200<span>/day</span></div>
+                        <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 20k km
+                             <span class="fas fa-calendar-alt"></span> 2019 <span class="fas fa-gas-pump"></span> Petrol
+                             <span class="fas fa-cogs"></span> Automatic </p>
+                         <a href="payment.html?type=car&vehicle=Maruti%20Suzuki%20Swift&price=1200" class="btn">Rent Now</a>
+                    </div>
                 </div>
-
-                <div class="box">
-                    <img src="image6" alt="">
-                    <div class="price"><span>price: </span> $65000/-</div>
-                    <p>
-                        <span class="fas fa-circle"></span>new
-                        <span class="fas fa-circle"></span>2021
-                        <span class="fas fa-circle"></span>automatic
-                        <span class="fas fa-circle"></span>petrol
-                        <span class="fas fa-circle"></span>183mph
-                    </p>
-                    <a href="#" class="btn">check out</a>
+                 <div class="swiper-slide box">
+                     <img src="assets/car-2.png" alt="Hyundai Creta">
+                     <div class="content">
+                         <h3>Hyundai Creta</h3>
+                         <div class="price">₹ 1800<span>/day</span></div>
+                         <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 15k km
+                             <span class="fas fa-calendar-alt"></span> 2020
+                             <span class="fas fa-gas-pump"></span> Diesel
+                             <span class="fas fa-cogs"></span> Manual
+                         </p>
+                          <a href="payment.html?type=car&vehicle=Hyundai%20Creta&price=1800" class="btn">Rent Now</a>
+                     </div>
+                 </div>
+                 <div class="swiper-slide box">
+                     <img src="assets/car-3.png" alt="Kia Seltos">
+                     <div class="content">
+                         <h3>Kia Seltos</h3>
+                         <div class="price">₹ 1900<span>/day</span></div>
+                         <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 10k km
+                             <span class="fas fa-calendar-alt"></span> 2021
+                             <span class="fas fa-gas-pump"></span> Petrol
+                             <span class="fas fa-cogs"></span> Automatic
+                         </p>
+                          <a href="payment.html?type=car&vehicle=Kia%20Seltos&price=1900" class="btn">Rent Now</a>
+                     </div>
+                 </div>
+                 <div class="swiper-slide box">
+                     <img src="assets/car-4.png" alt="Mahindra XUV700">
+                     <div class="content">
+                         <h3>Mahindra XUV700</h3>
+                         <div class="price">₹ 2500<span>/day</span></div>
+                         <p>
+                             <span class="fas fa-check-circle"></span> Available
+                             <span class="fas fa-tachometer-alt"></span> 8k km
+                             <span class="fas fa-calendar-alt"></span> 2022
+                             <span class="fas fa-gas-pump"></span> Diesel
+                             <span class="fas fa-cogs"></span> Manual
+                         </p>
+                          <a href="payment.html?type=car&vehicle=Mahindra%20XUV700&price=2500" class="btn">Rent Now</a>
+                     </div>
+                 </div>
                 </div>
-            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js" defer></script>
+
 </body>
 </html>
