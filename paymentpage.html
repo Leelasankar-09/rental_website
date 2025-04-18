@@ -3,138 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vroom - Payment</title>
+    <title>Vroom - Complete Your Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="payment.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="payment.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="payment.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
+
     <header class="header">
         <a href="index.html" class="logo"><span>Vr</span>oom</a>
         <nav class="navbar">
             <a href="index.html#home">Home</a>
             <a href="index.html#vehicles">Vehicles</a>
-            <a href="index.html#featured">Featured</a>
             <a href="index.html#reviews">Reviews</a>
             <a href="index.html#contact">Contact</a>
         </nav>
         <div id="login">
             <button class="btn">Login</button>
             <i class="fas fa-user"></i>
-            </div>
+             <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
+        </div>
     </header>
 
     <div class="login-form-container form-container">
-        <span class="fas fa-times" id="close-login-form"></span>
-        <form id="loginForm">
-            <h3>Log In</h3>
-            <input type="text" placeholder="Enter your username" class="box" id="loginUsername" required>
-            <input type="password" placeholder="Enter your password" class="box" id="loginPassword" required>
-            <button type="submit" class="btn">Log In</button> <p>Don't have an account? <a href="#" id="signupLink">Create Account</a></p>
-            <p id="loginMessage" class="form-message"></p>
+        <span class="fas fa-times" id="close-login-form" aria-label="Close login form"></span>
+        <form id="loginForm" aria-labelledby="login-heading">
+            <h3 id="login-heading">User Login</h3>
+            <div class="inputBox">
+                 <label for="loginUsername">Username:</label>
+                <input type="text" placeholder="Enter username here" class="box" id="loginUsername" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                 <label for="loginPassword">Password:</label>
+                <input type="password" placeholder="Enter password here" class="box" id="loginPassword" required aria-required="true">
+            </div>
+            <button type="submit" class="btn">Login now</button>
+            <p>Don't have an account? <a href="#" id="signupLink">Create One</a></p>
+            <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
         </form>
     </div>
 
     <div class="sign-form-container form-container">
-        <span class="fas fa-times" id="close-sign-form"></span>
-        <form id="signupForm">
-            <h3>Create Account</h3>
-            <input type="email" placeholder="Enter your email" class="box" id="signupEmail" required>
-            <input type="text" placeholder="Enter your name" class="box" id="signupName" required>
-            <input type="text" placeholder="Choose a username" class="box" id="signupUsername" required>
-            <input type="password" placeholder="Enter password" class="box" id="signupPassword" required>
-            <input type="password" placeholder="Confirm password" class="box" id="signupConfirmPassword" required>
-            <button type="submit" class="btn">Sign Up</button> <p>Already have an account? <a href="#" id="loginLink">Log In</a></p>
-             <p id="signupMessage" class="form-message"></p>
+        <span class="fas fa-times" id="close-sign-form" aria-label="Close sign up form"></span>
+        <form id="signupForm" aria-labelledby="signup-heading">
+            <h3 id="signup-heading">User Signup</h3>
+            <div class="inputBox">
+                 <label for="signupEmail">Email:</label>
+                <input type="email" placeholder="Enter E-mail here" class="box" id="signupEmail" required aria-required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+            </div>
+             <div class="inputBox">
+                <label for="signupName">Full Name:</label>
+                <input type="text" placeholder="Enter your name here" class="box" id="signupName" required aria-required="true">
+            </div>
+             <div class="inputBox">
+                <label for="signupUsername">Username:</label>
+                <input type="text" placeholder="Enter your username here" class="box" id="signupUsername" required aria-required="true">
+            </div>
+            <div class="inputBox">
+                <label for="signupPassword">Password:</label>
+                <input type="password" placeholder="Enter password here" class="box" id="signupPassword" required aria-required="true">
+            </div>
+            <div class="inputBox">
+                 <label for="signupConfirmPassword">Confirm Password:</label>
+                <input type="password" placeholder="Retype password" class="box" id="signupConfirmPassword" required aria-required="true">
+            </div>
+            <button type="submit" class="btn">Signup</button>
+            <p id="signupMessage" class="form-message" role="status" aria-live="polite"></p>
         </form>
     </div>
 
-    <section class="payment" id="payment">
-        <h1 class="heading">Complete Your <span>Payment</span></h1>
-        <div class="container">
-            <form id="paymentForm">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="title">Rental Details</h3>
-                        <div class="inputBox">
-                            <label>Vehicle Type:</label>
-                            <span id="vehicleType">Loading...</span>
-                        </div>
-                        <div class="inputBox">
-                            <label>Vehicle:</label>
-                            <span id="vehicleName">Loading...</span>
-                        </div>
-                        <div class="inputBox">
-                            <label>Price:</label>
-                            <span id="vehiclePrice">Loading...</span>
-                        </div>
-                        <div class="inputBox">
-                            <label for="rentalDays">Rental Days:</label>
-                            <input type="number" id="rentalDays" placeholder="Enter number of days" min="1" required>
-                        </div>
-
-                        <div class="inputBox payment-method">
-                            <label>Choose Payment Method:</label>
-                            <div class="method-toggle">
-                                <input type="radio" name="payment-method" id="card-method" value="card" checked>
-                                <label for="card-method">Credit/Debit Card</label>
-                                <input type="radio" name="payment-method" id="upi-method" value="upi">
-                                <label for="upi-method">UPI</label>
-                            </div>
-                        </div>
-
-                        <div class="payment-section" id="card-section">
+    <main>
+        <section class="payment" id="payment">
+            <h1 class="heading">Complete Your <span>Payment</span></h1>
+            <div class="container">
+                <form id="paymentForm" aria-labelledby="payment-heading">
+                    <h3 class="title" id="payment-heading">Payment Details</h3>
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="title">Rental Information</h4>
                             <div class="inputBox">
-                                <label>Cards Accepted:</label>
-                                <img src="assets/card_img.png" alt="Accepted payment cards (Visa, MasterCard, etc.)">
+                                <label>Vehicle Type:</label>
+                                <p id="vehicleType">Loading...</p>
                             </div>
                             <div class="inputBox">
-                                <label for="card-name">Name on Card:</label>
-                                <input type="text" id="card-name" placeholder="John Doe" required>
-                            </div>
-                            <div class="inputBox">
-                                <label for="card-number">Credit Card Number:</label>
-                                <input type="text" id="card-number" placeholder="1111 2222 3333 4444" pattern="[0-9\s]{13,19}" required>
-                            </div>
-                            <div class="inputBox">
-                                <label for="exp-month">Expiration Month:</label>
-                                <input type="text" id="exp-month" placeholder="January" required>
-                            </div>
-                            <div class="flex">
-                                <div class="inputBox">
-                                    <label for="exp-year">Expiration Year:</label>
-                                     <input type="number" id="exp-year" placeholder="2025" min="2025" required>
-                                </div>
-                                <div class="inputBox">
-                                    <label for="cvv">CVV:</label>
-                                    <input type="text" id="cvv" placeholder="123" pattern="[0-9]{3,4}" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="payment-section" id="upi-section" style="display: none;">
-                            <div class="inputBox">
-                                <label for="bill-amount">Bill Amount (₹):</label>
-                                <input type="number" id="bill-amount" step="0.01" min="1" readonly>
+                                <label>Vehicle Name:</label>
+                                <p id="vehicleName">Loading...</p>
                             </div>
                              <div class="inputBox">
-                                <label for="upi-id">UPI ID (Optional):</label>
-                                <input type="text" id="upi-id" placeholder="yourname@upi" pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Enter a valid UPI ID (e.g., yourname@upi)">
-                                <p class="upi-lookup-result"></p> <p class="upi-error-message"></p> </div>
+                                <label>Price per Day:</label>
+                                <p id="vehiclePrice">Loading...</p>
+                            </div>
                             <div class="inputBox">
-                                <label>Scan to Pay:</label>
-                                <div id="upi-qr-code">
+                                <label for="rentalDays">Rental Days:</label>
+                                <input type="number" id="rentalDays" placeholder="Enter number of days" min="1" required aria-required="true">
+                            </div>
+
+                            <div class="inputBox">
+                                <label for="bill-amount">Total Bill Amount (<span id="currencyDisplay">₹</span>):</label>
+                                <input type="number" id="bill-amount" step="0.01" min="1" readonly aria-readonly="true" value="0.00">
+                            </div>
+
+                            <div class="inputBox payment-method">
+                                <label class="title">Choose Payment Method:</label>
+                                <div class="method-toggle" role="radiogroup" aria-labelledby="payment-method-heading">
+                                     <span id="payment-method-heading" class="visually-hidden">Choose a payment method</span>
+                                    <input type="radio" name="payment-method" id="card-method" value="card" checked aria-checked="true">
+                                    <label for="card-method">Credit/Debit Card</label>
+
+                                    <input type="radio" name="payment-method" id="upi-method" value="upi" aria-checked="false">
+                                    <label for="upi-method">UPI</label>
+                                </div>
+                            </div>
+
+                            <div class="payment-section" id="card-section">
+                                <h4 class="title">Card Details</h4>
+                                <div class="inputBox">
+                                    <label>Cards Accepted:</label>
+                                    <img src="assets/card_img.png" alt="Accepted credit and debit cards including Visa, Mastercard, American Express, and Discover">
+                                </div>
+                                <div class="inputBox">
+                                    <label for="card-name">Name on Card:</label>
+                                    <input type="text" id="card-name" placeholder="John Doe" required aria-required="true">
+                                </div>
+                                <div class="inputBox">
+                                    <label for="card-number">Credit Card Number:</label>
+                                    <input type="text" id="card-number" placeholder="1111 2222 3333 4444" pattern="[0-9\s]{13,19}" title="Enter a valid credit card number (13-19 digits)" required aria-required="true">
+                                </div>
+                                <div class="inputBox">
+                                    <label for="exp-month">Expiration Month:</label>
+                                    <input type="text" id="exp-month" placeholder="e.g. January or 01" required aria-required="true">
+                                </div>
+                                <div class="flex">
+                                    <div class="inputBox">
+                                        <label for="exp-year">Expiration Year:</label>
+                                        <input type="number" id="exp-year" placeholder="e.g. 2025" min="2024" required aria-required="true"> </div>
+                                    <div class="inputBox">
+                                        <label for="cvv">CVV:</label>
+                                        <input type="text" id="cvv" placeholder="e.g. 123" pattern="[0-9]{3,4}" title="Enter your 3 or 4 digit CVV" required aria-required="true">
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="payment-section" id="upi-section" style="display: none;">
+                                <h4 class="title">UPI Details</h4>
+                                <div class="inputBox">
+                                    <label for="upi-id">Your UPI ID (Optional):</label>
+                                    <input type="text" id="upi-id" placeholder="e.g. yourname@upi" pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Enter a valid UPI ID format (e.g., yourname@upi)">
+                                    <p class="upi-lookup-result form-message form-message--success" role="status" aria-live="polite"></p>
+                                    <p class="upi-error-message form-message form-message--error" role="alert" aria-live="assertive"></p>
+                                </div>
+                                <div class="inputBox">
+                                    <label>Scan to Pay:</label>
+                                    <div id="upi-qr-code"></div>
+                                     <p class="upi-help">Use PhonePe, Google Pay, or any UPI app to scan the QR code.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button type="submit" class="btn submit-btn">Pay Now</button> <p id="paymentMessage" class="message"></p>
-            </form>
-        </div>
-    </section>
+                    <p id="paymentMessage" class="form-message" role="status" aria-live="polite"></p>
+                    <button type="submit" class="btn submit-btn">Pay Now</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-    <section class="footer">
+    <footer class="footer">
         <div class="box-container">
             <div class="box">
                 <h3>Our Branches</h3>
@@ -149,7 +184,6 @@
                 <h3>Quick Links</h3>
                 <a href="index.html#home"><i class="fas fa-arrow-right"></i>Home</a>
                 <a href="index.html#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a>
-                <a href="index.html#featured"><i class="fas fa-arrow-right"></i>Featured</a>
                 <a href="index.html#reviews"><i class="fas fa-arrow-right"></i>Reviews</a>
                 <a href="index.html#contact"><i class="fas fa-arrow-right"></i>Contact</a>
             </div>
@@ -157,8 +191,8 @@
                 <h3>Contact Info</h3>
                 <a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a>
                 <a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a>
-                <a href="mailto:amrita.edu@gmail.com"><i class="fas fa-envelope"></i>amrita.edu@gmail.com</a>
-                <a href="#"><i class="fas fa-map-marker-alt"></i>Amritapuri, India 690518</a>
+                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i>your.email@example.com</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i>Your City, India 123456</a>
             </div>
             <div class="box">
                 <h3>Social Media</h3>
@@ -170,8 +204,11 @@
                 <a href="#"><i class="fab fa-reddit"></i>Reddit</a>
             </div>
         </div>
-    </section>
-    <div class="end">Made by Group-15 | All Rights Reserved ©</div>
+        <div class="credit">Made by Group-15 | All rights reserved © 2025</div>
+    </footer>
 
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js" defer></script>
+
+</body>
 </html>
