@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vroom - Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="payment.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="payment.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="payment.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <a href="index.html" class="logo"><span>Vr</span>oom</a>
         <nav class="navbar">
@@ -23,23 +21,20 @@
         <div id="login">
             <button class="btn">Login</button>
             <i class="fas fa-user"></i>
-        </div>
+            </div>
     </header>
 
-    <!-- Login Form -->
     <div class="login-form-container form-container">
         <span class="fas fa-times" id="close-login-form"></span>
         <form id="loginForm">
             <h3>Log In</h3>
             <input type="text" placeholder="Enter your username" class="box" id="loginUsername" required>
             <input type="password" placeholder="Enter your password" class="box" id="loginPassword" required>
-            <input type="submit" value="Log In" class="btn">
-            <p>Don't have an account? <a href="#" id="signupLink">Create Account</a></p>
-            <p id="loginMessage" style="color: red; display: none;"></p>
+            <button type="submit" class="btn">Log In</button> <p>Don't have an account? <a href="#" id="signupLink">Create Account</a></p>
+            <p id="loginMessage" class="form-message"></p>
         </form>
     </div>
 
-    <!-- Sign-up Form -->
     <div class="sign-form-container form-container">
         <span class="fas fa-times" id="close-sign-form"></span>
         <form id="signupForm">
@@ -49,13 +44,11 @@
             <input type="text" placeholder="Choose a username" class="box" id="signupUsername" required>
             <input type="password" placeholder="Enter password" class="box" id="signupPassword" required>
             <input type="password" placeholder="Confirm password" class="box" id="signupConfirmPassword" required>
-            <input type="submit" value="Sign Up" class="btn">
-            <p>Already have an account? <a href="#" id="loginLink">Log In</a></p>
-            <p id="signupMessage" style="color: green; display: none;"></p>
+            <button type="submit" class="btn">Sign Up</button> <p>Already have an account? <a href="#" id="loginLink">Log In</a></p>
+             <p id="signupMessage" class="form-message"></p>
         </form>
     </div>
 
-    <!-- Payment Section -->
     <section class="payment" id="payment">
         <h1 class="heading">Complete Your <span>Payment</span></h1>
         <div class="container">
@@ -80,7 +73,6 @@
                             <input type="number" id="rentalDays" placeholder="Enter number of days" min="1" required>
                         </div>
 
-                        <!-- Payment Method Toggle -->
                         <div class="inputBox payment-method">
                             <label>Choose Payment Method:</label>
                             <div class="method-toggle">
@@ -91,7 +83,6 @@
                             </div>
                         </div>
 
-                        <!-- Card Payment Section -->
                         <div class="payment-section" id="card-section">
                             <div class="inputBox">
                                 <label>Cards Accepted:</label>
@@ -112,7 +103,7 @@
                             <div class="flex">
                                 <div class="inputBox">
                                     <label for="exp-year">Expiration Year:</label>
-                                    <input type="number" id="exp-year" placeholder="2025" min="2025" required>
+                                     <input type="number" id="exp-year" placeholder="2025" min="2025" required>
                                 </div>
                                 <div class="inputBox">
                                     <label for="cvv">CVV:</label>
@@ -121,31 +112,28 @@
                             </div>
                         </div>
 
-                        <!-- UPI Payment Section -->
                         <div class="payment-section" id="upi-section" style="display: none;">
                             <div class="inputBox">
                                 <label for="bill-amount">Bill Amount (₹):</label>
                                 <input type="number" id="bill-amount" step="0.01" min="1" readonly>
                             </div>
-                            <div class="inputBox">
+                             <div class="inputBox">
                                 <label for="upi-id">UPI ID (Optional):</label>
                                 <input type="text" id="upi-id" placeholder="yourname@upi" pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Enter a valid UPI ID (e.g., yourname@upi)">
-                            </div>
+                                <p class="upi-lookup-result"></p> <p class="upi-error-message"></p> </div>
                             <div class="inputBox">
                                 <label>Scan to Pay:</label>
-                                <div id="upi-qr-code"></div>
-                                <p class="upi-help">Use PhonePe, Google Pay, or any UPI app to scan and pay.</p>
-                            </div>
+                                <div id="upi-qr-code">
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn">Pay Now</button>
-                <p id="paymentMessage" style="color: green; display: none;"></p>
+                <button type="submit" class="btn submit-btn">Pay Now</button> <p id="paymentMessage" class="message"></p>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <section class="footer">
         <div class="box-container">
             <div class="box">
@@ -185,46 +173,5 @@
     </section>
     <div class="end">Made by Group-15 | All Rights Reserved ©</div>
 
-    <!-- JavaScript for Login/Signup (Shared with index.html) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginBtn = document.querySelector('#login .btn');
-            const loginFormContainer = document.querySelector('.login-form-container');
-            const signupFormContainer = document.querySelector('.sign-form-container');
-            const closeLoginForm = document.querySelector('#close-login-form');
-            const closeSignForm = document.querySelector('#close-sign-form');
-            const signupLink = document.querySelector('#signupLink');
-            const loginLink = document.querySelector('#loginLink');
-
-            // Show login form
-            loginBtn.addEventListener('click', () => {
-                loginFormContainer.classList.add('active');
-            });
-
-            // Close login form
-            closeLoginForm.addEventListener('click', () => {
-                loginFormContainer.classList.remove('active');
-            });
-
-            // Show signup form from login form
-            signupLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                loginFormContainer.classList.remove('active');
-                signupFormContainer.classList.add('active');
-            });
-
-            // Show login form from signup form
-            loginLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                signupFormContainer.classList.remove('active');
-                loginFormContainer.classList.add('active');
-            });
-
-            // Close signup form
-            closeSignForm.addEventListener('click', () => {
-                signupFormContainer.classList.remove('active');
-            });
-        });
-    </script>
-</body>
+    </body>
 </html>

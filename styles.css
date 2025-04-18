@@ -3,13 +3,13 @@
 
 /* Root Variables - Refined Palette & Effects */
 :root {
-    --primary: #005f99;      /* Deep Blue - Professional & Trustworthy */
-    --secondary: #f4b400;    /* Vibrant Yellow - Energetic & Actionable */
-    --dark: #0a1a2f;         /* Very Dark Blue - Sophisticated Backgrounds */
-    --light: #f8fafc;        /* Almost White - Clean & Airy */
-    --gray: #64748b;         /* Mid Gray - Body Text, Subtle Elements */
-    --light-gray: #e2e8f0;   /* Light Gray - Borders, Backgrounds */
-    --accent: #e63946;       /* Red - Attention, Hover States (used sparingly) */
+    --primary: #005f99;         /* Deep Blue - Professional & Trustworthy */
+    --secondary: #f4b400;       /* Vibrant Yellow - Energetic & Actionable */
+    --dark: #0a1a2f;            /* Very Dark Blue - Sophisticated Backgrounds */
+    --light: #f8fafc;           /* Almost White - Clean & Airy */
+    --gray: #64748b;            /* Mid Gray - Body Text, Subtle Elements */
+    --light-gray: #e2e8f0;      /* Light Gray - Borders, Backgrounds */
+    --accent: #e63946;          /* Red - Attention, Hover States (used sparingly) */
     --border-radius-sm: 0.6rem;
     --border-radius-md: 1.2rem;
     --border-radius-lg: 2.0rem;
@@ -35,7 +35,7 @@
 ::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 5px;
-    border: 2px solid var(--light); 
+    border: 2px solid var(--light);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -45,7 +45,7 @@ html {
     font-size: 62.5%;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    scroll-padding-top: 8rem; 
+    scroll-padding-top: 8rem;
 }
 
 body {
@@ -69,7 +69,7 @@ body {
 }
 
 section {
-    padding: 8rem 5%; 
+    padding: 8rem 5%;
     max-width: 1440px; /* Max container width */
     margin: 0 auto; /* Center content */
 }
@@ -753,13 +753,12 @@ section:hover .heading span::after { /* Trigger animation on section hover */
     background-color: #fff; /* White background for contrast */
 }
 
-.reviews .reviews-slider .wrapper { /* Renamed to .reviews-grid */
+.reviews .reviews-slider .swiper-wrapper { /* Corrected selector */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 3rem;
     padding: 2rem 0; /* Padding top/bottom */
 }
-/* .reviews .reviews-slider .rowe is redundant if using grid directly */
 
 .reviews .box { /* Style individual review box */
     background: var(--light); /* Light background */
@@ -962,8 +961,8 @@ section:hover .heading span::after { /* Trigger animation on section hover */
         display: block;
     }
     .header #login i.fa-user { /* Keep user icon visible if needed, or handle login differently */
-       /* Adjust if user icon should also be part of menu or stay visible */
-       margin-left: auto; /* Push user icon to the right */
+        /* Adjust if user icon should also be part of menu or stay visible */
+        margin-left: auto; /* Push user icon to the right */
     }
 
 
@@ -1025,7 +1024,7 @@ section:hover .heading span::after { /* Trigger animation on section hover */
     .swiper-slide .box { padding: 1.5rem; }
     .swiper-slide .box h3 { font-size: 1.8rem; }
     .swiper-slide .box .price { font-size: 2rem; }
-    .reviews .reviews-slider .wrapper { grid-template-columns: 1fr; } /* Stack reviews */
+    .reviews .reviews-slider .swiper-wrapper { grid-template-columns: 1fr; } /* Stack reviews */
     .footer .box-container { grid-template-columns: 1fr; } /* Stack footer columns */
     .footer .box { text-align: center; }
     .footer .box a { justify-content: center; }
