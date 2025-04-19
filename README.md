@@ -80,8 +80,8 @@ We welcome contributions to Vroom! If you'd like to contribute, please follow th
 
 ## License
 
-(Add your chosen license here, e.g., MIT, Apache 2.0)
+.
 
 ## Contact
 
-(Your contact information or a link to a contact form)
+.
