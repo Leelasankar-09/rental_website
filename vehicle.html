@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vroom - Vehicle Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming your main CSS file is styles.css -->
+    <style>
+        /* Add any specific styles for vehicle.html here */
+        .vehicle-details-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .vehicle-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .vehicle-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .vehicle-specs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+        }
+        .vehicle-spec {
+            text-align: center;
+        }
+        .vehicle-spec i {
+            margin-right: 0.5rem;
+        }
+        .vehicle-description {
+            line-height: 1.6;
+        }
+        .booking-form {
+            margin-top: 2rem;
+            /* Add more styling as needed */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (Copied from index.html) -->
+    <header class="header">
+        <a href="index.html#home" class="logo"><span>Vr</span>oom</a> <!-- Link back to index.html home -->
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#vehicles">Vehicles</a>
+            <a href="index.html#reviews">Reviews</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div id="login">
+            <button class="btn">Login</button>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
+        </div>
+    </header>
+
+    <!-- Vehicle Details Content -->
+    <main>
+        <div class="vehicle-details-container">
+            <h1 class="vehicle-title">Vehicle Model Name</h1>
+            <img src="assets/placeholder-vehicle.jpg" alt="Vehicle Image" class="vehicle-image">
+            <div class="vehicle-specs">
+                <div class="vehicle-spec"><i class="fas fa-car"></i> Type: Sedan</div>
+                <div class="vehicle-spec"><i class="fas fa-gas-pump"></i> Fuel: Petrol</div>
+                <div class="vehicle-spec"><i class="fas fa-cogs"></i> Transmission: Automatic</div>
+                <div class="vehicle-spec"><i class="fas fa-users"></i> Seats: 5</div>
+            </div>
+            <p class="vehicle-description">
+                This is a placeholder description for the vehicle. You should replace this with actual vehicle details.
+            </p>
+
+            <div class="booking-form">
+                <h2>Book This Vehicle</h2>
+                <!-- Add booking form elements here (date pickers, etc.) -->
+                <p>Booking form will be implemented in a later step.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Copied from index.html) -->
+    <footer class="footer">
+        <div class="box-container">
+            <div class="box"><h3>Our Branches</h3><a href="#"><i class="fas fa-map-marker-alt"></i>India</a><a href="#"><i class="fas fa-map-marker-alt"></i>Kenya</a><a href="#"><i class="fas fa-map-marker-alt"></i>Canada</a><a href="#"><i class="fas fa-map-marker-alt"></i>Korea</a><a href="#"><i class="fas fa-map-marker-alt"></i>Australia</a><a href="#"><i class="fas fa-map-marker-alt"></i>France</a></div>
+            <div class="box"><h3>Quick Links</h3><a href="index.html#home"><i class="fas fa-arrow-right"></i>Home</a><a href="index.html#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a><a href="index.html#reviews"><i class="fas fa-arrow-right"></i>Reviews</a><a href="index.html#contact"><i class="fas fa-arrow-right"></i>Contact</a></div>
+            <div class="box"><h3>Contact Info</h3><a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a><a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a><a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i>your.email@example.com</a><a href="#"><i class="fas fa-map-marker-alt"></i>Your City, India 123456</a></div>
+            <div class="box"><h3>Social Media</h3><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-instagram"></i>Instagram</a><a href="#"><i class="fab fa-twitter"></i>Twitter</a><a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a><a href="#"><i class="fab fa-pinterest"></i>Pinterest</a><a href="#"><i class="fab fa-reddit"></i>Reddit</a></div>
+        </div>
+        <div class="credit">Made by Group-15 | All rights reserved © 2025</div>
+    </footer>
+
+    <script src="script.js"></script> <!-- Link your main script file -->
+</body>
+</html>
