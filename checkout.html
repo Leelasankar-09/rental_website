@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="components.css">
+    <style>
+        /* Add any page-specific styles here, if needed */
+        .vehicle-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+
+        <div class="card" id="bookingSummary">
+            <h2>Booking Summary</h2>
+            <div id="vehicleDetails">
+                <!-- Vehicle details will be dynamically inserted here -->
+            </div>
+            <p>Start Date: <span id="startDate"></span></p>
+            <p>End Date: <span id="endDate"></span></p>
+        </div>
+
+        <button class="button" onclick="processPayment()">Pay Now</button>
+    </div>
+
+    <script>
+        // Placeholder vehicle data (replace with actual data fetching later)
+        const vehicles = {
+          '1': { name: 'Example Bike', image: 'placeholder-bike.jpg', price: '100' },
+          '2': { name: 'Another Bike', image: 'placeholder-bike2.jpg', price: '150' },
+          // Add more placeholder vehicles as needed
+        };
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        function displayBookingSummary() {
+            var vehicleId = getUrlParameter('vehicleId');
+            var startDate = getUrlParameter('startDate');
+            var endDate = getUrlParameter('endDate');
+
+            document.getElementById('startDate').textContent = startDate;
+            document.getElementById('endDate').textContent = endDate;
+
+            // Display vehicle details
+            const vehicle = vehicles[vehicleId];
+            if (vehicle) {
+                const vehicleDetailsDiv = document.getElementById('vehicleDetails');
+                vehicleDetailsDiv.innerHTML = `
+                    <h3>${vehicle.name}</h3>
+                    <img src="${vehicle.image}" alt="${vehicle.name}" class="vehicle-image">
+                    <p>Price: $${vehicle.price}</p>
+                `;
+            } else {
+                console.error('Vehicle details not found for ID:', vehicleId);
+                const vehicleDetailsDiv = document.getElementById('vehicleDetails');
+                vehicleDetailsDiv.innerHTML = `<p>Vehicle details not found.</p>`;
+            }
+        }
+
+        function processPayment() {
+            alert("Payment successful!");
+            // In a real application, you would integrate with a payment gateway here.
+        }
+
+        // Call the function to display the summary when the page loads
+        displayBookingSummary();
+    </script>
+</body>
+</html>

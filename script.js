@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Vehicle Data with Locations ---
+    const vehicleData = {
+       bikes: [
+           { id: 1, imgSrc: 'assets/bikes/bike1.png', title: 'Royal Enfield Classic 350', price: 800, details: [{icon:'fas fa-tachometer-alt', text:'40 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Hyderabad', duration: 7, available: true },
+           { id: 2, imgSrc: 'assets/bikes/bike2.png', title: 'Bajaj Pulsar 150', price: 600, details: [{icon:'fas fa-tachometer-alt', text:'50 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Kochi', duration: 14, available: true },
+           { id: 3, imgSrc: 'assets/bikes/bike3.png', title: 'KTM Duke 200', price: 900, details: [{icon:'fas fa-tachometer-alt', text:'35 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Chennai', duration: 30, available: true },
+           { id: 4, imgSrc: 'assets/bikes/bike4.png', title: 'Honda CB Shine', price: 500, details: [{icon:'fas fa-tachometer-alt', text:'65 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Hyderabad', duration: 7, available: false },
+       ],
+       cars: [
+           { id: 5, imgSrc: 'assets/cars/b1.jpg', title: 'Maruti Suzuki Swift', price: 1200, details: [{icon:'fas fa-tachometer-alt', text:'20k km'}, {icon:'fas fa-car', text:'2019'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}], location: 'Chennai', duration: 14, available: true },
+           { id: 6, imgSrc: 'assets/cars/b2.png', title: 'Hyundai Creta', price: 1800, details: [{icon:'fas fa-tachometer-alt', text:'15k km'}, {icon:'fas fa-car', text:'2020'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}], location: 'Kochi', duration: 30, available: true },
+           { id: 7, imgSrc: 'assets/cars/b3.png', title: 'Kia Seltos', price: 1900, details: [{icon:'fas fa-tachometer-alt', text:'10k km'}, {icon:'fas fa-car', text:'2021'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}], location: 'Hyderabad', duration: 7, available: true },
+           { id: 8, imgSrc: 'assets/cars/b4.png', title: 'Mahindra XUV700', price: 2500, details: [{icon:'fas fa-tachometer-alt', text:'8k km'}, {icon:'fas fa-car', text:'2022'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}], location: 'Chennai', duration: 14, available: false },
+       ]
+   };
+
     // --- Variable Declarations ---
     const loginBtn = document.querySelector('#login .btn');
     const userIcon = document.querySelector('#login .fa-user'); // Might be menu icon on mobile
@@ -21,6 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const vehicleTypeRadios = document.querySelectorAll('input[name="vehicle-type"]');
     const bikesSliderEl = document.getElementById('bikes-slider');
     const carsSliderEl = document.getElementById('cars-slider');
+    const locationFilter = document.getElementById('location-filter');
+
+    //Filter Controls
+    const minPriceInput = document.getElementById('min-price');
+    const maxPriceInput = document.getElementById('max-price');
+    const minDurationInput = document.getElementById('min-duration');
+    const maxDurationInput = document.getElementById('max-duration');
+    const availabilityCheckbox = document.getElementById('availability');
+    const applyFiltersButton = document.getElementById('apply-filters');
 
     const featuredVehicleTypeRadios = document.querySelectorAll('input[name="featured-vehicle-type"]');
     const featuredBikesSliderEl = document.getElementById('featured-bikes-slider');
@@ -228,11 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleVehicleToggle(featuredVehicleTypeRadios, featuredBikesSliderEl, featuredCarsSliderEl, featuredBikesSwiper, featuredCarsSwiper);
 
 
-    // --- Placeholder Content Population (Example) ---
-    // !! IMPORTANT !!: Replace this with your actual data loading mechanism (e.g., fetch from API)
-    function populateSlider(swiperWrapperSelector, items) {
-        const wrapper = document.querySelector(swiperWrapperSelector);
-        if (!wrapper) return;
+    function populateSlider(wrapper, items) { // Simpler: Directly use the wrapper element
         wrapper.innerHTML = ''; // Clear existing placeholders
 
         // Simulate fetching data from an API (replace with actual API call)
@@ -240,16 +261,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // For now, we use the 'items' argument, assuming it's the fetched data.
 
         items.forEach(item => {
+          // Ensure item.id is defined before using it
+          const vehicleId = item.id;
             const slide = `
-                <div class="swiper-slide" data-vehicle-id="${item.id}">  <!-- Add vehicle ID -->
+                <div class="swiper-slide" data-vehicle-id="${vehicleId}">  <!-- Add vehicle ID -->
                         <img src="${item.imgSrc}" alt="${item.title}" loading="lazy">
                         <!-- When integrating with a backend:
                              - Optimize images (resize, compress, use WebP format) before serving. -->
                        
                        <h3>${item.title}</h3>
                         <div class="price">${item.price} <span>/day</span></div>
+                         <div class="booking-dates">
+                            <label for="start-date-${vehicleId}">Start Date:</label>
+                            <input type="date" id="start-date-${vehicleId}" class="box" required>
+                            <label for="end-date-${vehicleId}">End Date:</label>
+                            <input type="date" id="end-date-${vehicleId}" class="box" required>
+                        </div>
                         <p>
-                           ${item.details.map(d => `<div><i class="${d.icon}"></i> ${d.text}</div>`).join('')}
+                            ${item.details.map(d => `<div><i class="${d.icon}"></i> ${d.text}</div>`).join('')}
                         </p>
                         ${item.stars ? `<div class="stars">${'<i class="fas fa-star"></i>'.repeat(Math.floor(item.stars))}${(item.stars % 1 !== 0) ? '<i class="fas fa-star-half-alt"></i>' : ''}</div>` : ''}
                         <div class="booking-actions">
@@ -267,56 +296,121 @@ document.addEventListener('DOMContentLoaded', () => {
          if (sliderId === 'featured-cars-slider' && featuredCarsSwiper) featuredCarsSwiper.update();
     }
 
-    // --- Example Data (Replace with actual API response)---
-    //  In a real app, the 'id' would come from your database.
-    //  Ensure image paths are correct relative to your server.
-    const exampleBikes = [
-        { id: 1, imgSrc: 'assets/bikes/bike1.png', title: 'Royal Enfield Classic 350', price: '₹800', details: [{icon:'fas fa-tachometer-alt', text:'40 km/l'}, {icon:'fas fa-cogs', text:'Manual'}] },
-        { id: 2, imgSrc: 'assets/bikes/bike2.png', title: 'Bajaj Pulsar 150', price: '₹600', details: [{icon:'fas fa-tachometer-alt', text:'50 km/l'}, {icon:'fas fa-cogs', text:'Manual'}] },
-        { id: 3, imgSrc: 'assets/bikes/bike3.png', title: 'KTM Duke 200', price: '₹900', details: [{icon:'fas fa-tachometer-alt', text:'35 km/l'}, {icon:'fas fa-cogs', text:'Manual'}] },
-        { id: 4, imgSrc: 'assets/bikes/bike4.png', title: 'Honda CB Shine', price: '₹500', details: [{icon:'fas fa-tachometer-alt', text:'65 km/l'}, {icon:'fas fa-cogs', text:'Manual'}] },
-    ];
-     const exampleCars = [
-        { id: 5, imgSrc: 'assets/cars/b1.jpg', title: 'Maruti Suzuki Swift', price: '₹1200', details: [{icon:'fas fa-tachometer-alt', text:'20k km'}, {icon:'fas fa-car', text:'2019'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}] },
-        { id: 6, imgSrc: 'assets/cars/b2.png', title: 'Hyundai Creta', price: '₹1800', details: [{icon:'fas fa-tachometer-alt', text:'15k km'}, {icon:'fas fa-car', text:'2020'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}] },
-        { id: 7, imgSrc: 'assets/cars/b3.png', title: 'Kia Seltos', price: '₹1900', details: [{icon:'fas fa-tachometer-alt', text:'10k km'}, {icon:'fas fa-car', text:'2021'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}] },
-        { id: 8, imgSrc: 'assets/cars/b4.png', title: 'Mahindra XUV700', price: '₹2500', details: [{icon:'fas fa-tachometer-alt', text:'8k km'}, {icon:'fas fa-car', text:'2022'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}] },
-    ];
-     const featuredBikesData = [ // Example: Subset or different bikes
-        { id: 9, imgSrc: 'assets/featured_bike1.jpg', title: 'Premium Racer', price: '₹2200', details: [{icon:'fas fa-motorcycle', text:'600cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-flag-checkered', text:'Track Ready'}], stars: 4.5 },
-        { id: 10, imgSrc: 'assets/featured_bike2.jpg', title: 'Adventure Tourer', price: '₹2500', details: [{icon:'fas fa-motorcycle', text:'800cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-map-marked-alt', text:'Long Trips'}], stars: 5 },
-     ];
-      const featuredCarsData = [ // Example: Subset or different cars
-        { id: 11, imgSrc: 'assets/featured_car1.jpg', title: 'Convertible Sun', price: '₹5500', details: [{icon:'fas fa-user-friends', text:'2 Seats'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-wind', text:'Open Top'}], stars: 4.5 },
-        { id: 12, imgSrc: 'assets/featured_car2.jpg', title: 'Rugged 4x4', price: '₹4800', details: [{icon:'fas fa-user-friends', text:'5 Seats'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-mountain', text:'All-Terrain'}], stars: 5 },
-     ];
+    function filterVehicles(type, location) {
+        let filtered = vehicleData[type];
+        if (location !== 'All Locations') {
+            filtered = filtered.filter(vehicle => vehicle.location === location);
+        }
+        return filtered;
+    }
 
-    // Populate the sliders with example data
-    populateSlider('#bikes-slider .swiper-wrapper', exampleBikes);
-    populateSlider('#cars-slider .swiper-wrapper', exampleCars);
-    populateSlider('#featured-bikes-slider .swiper-wrapper', featuredBikesData);
-    populateSlider('#featured-cars-slider .swiper-wrapper', featuredCarsData);    
+    // Function to apply filters
+    function applyFilters() {
+        const minPrice = parseInt(minPriceInput.value) || 0;
+        const maxPrice = parseInt(maxPriceInput.value) || Infinity;
+        const minDuration = parseInt(minDurationInput.value) || 0;
+        const maxDuration = parseInt(maxDurationInput.value) || Infinity;
+        const availability = availabilityCheckbox.checked;
+
+        // Fuel Type filtering (cars only)
+        const fuelTypeFilter = document.getElementById('fuel-type-filter');
+        const selectedFuelType = fuelTypeFilter ? fuelTypeFilter.value : 'All'; // Default to 'All' if not found
+
+        const selectedType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+
+        let filteredVehicles = vehicleData[selectedType];
+
+        if (selectedType === 'cars') { // Apply fuel type filter only for cars
+            filteredVehicles = filteredVehicles.filter(vehicle => {
+                const fuelTypeDetail = vehicle.details.find(detail => detail.icon === 'fas fa-gas-pump');
+                const vehicleFuelType = fuelTypeDetail ? fuelTypeDetail.text : 'Unknown'; // Handle missing info
+                return selectedFuelType === 'All' || vehicleFuelType === selectedFuelType;
+            });
+        }
+
+        filteredVehicles = filteredVehicles.filter(vehicle =>
+            vehicle.price >= minPrice &&
+            vehicle.price <= maxPrice &&
+            vehicle.duration >= minDuration &&
+            vehicle.duration <= maxDuration &&
+            (availability ? vehicle.available : true)
+        );
+
+         populateSlider(document.querySelector(`#${selectedType}-slider .swiper-wrapper`), filteredVehicles);
+    }   
+
+
+    // Event listener for filter changes
+    if (applyFiltersButton) {
+        applyFiltersButton.addEventListener('click', applyFilters);
+    }
+
+    // Modify the vehicle type toggle function to call applyFilters after the toggle
+    function handleVehicleToggle(radios, bikesSliderElement, carsSliderElement, bikesSwiperInstance, carsSwiperInstance) {
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.id.includes('bikes') && radio.checked) {
+                    bikesSliderElement.style.display = 'block';
+                    carsSliderElement.style.display = 'none';
+                    if (bikesSwiperInstance) bikesSwiperInstance.update();
+                } else if (radio.id.includes('cars') && radio.checked) {
+                    bikesSliderElement.style.display = 'none';
+                    carsSliderElement.style.display = 'block';
+                    if (carsSwiperInstance) carsSwiperInstance.update();
+                }
+                applyFilters(); // Apply filters after vehicle type change
+            });
+        });
+    }
+
+    // Call applyFilters on page load to apply initial filters
+    applyFilters();
+
+
+    // --- Event Listeners and Initializations ---
+    // Location filter
+    if (locationFilter) {
+        locationFilter.addEventListener('change', () => {
+            const selectedLocation = locationFilter.value;
+            const selectedType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+            const filteredVehicles = filterVehicles(selectedType, selectedLocation);
+            populateSlider(document.querySelector(`#${selectedType}-slider .swiper-wrapper`), filteredVehicles);
+        });
+    }
+
+    // Initial population
+    const initialType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+    populateSlider(document.querySelector(`#${initialType}-slider .swiper-wrapper`), filterVehicles(initialType, 'All Locations'));
 
     // --- Booking Logic --
     // Attach event listener to a parent element that exists on page load (e.g., document.body)
     document.body.addEventListener('click', (event) => {
         if (event.target.classList.contains('rent-now-btn')) {
             const vehicleId = event.target.dataset.vehicleId;
-            //  In a real system, you'd get dates from a date picker.
-            //  We'll use placeholders for now.
-            const startDate = '2024-08-15';
-            const endDate = '2024-08-20';
+            const startDateInput = document.getElementById(`start-date-${vehicleId}`);
+            const endDateInput = document.getElementById(`end-date-${vehicleId}`);
 
-            //  Basic validation (expand as needed)
+            if (!startDateInput || !endDateInput) {
+                alert('Could not find date input fields for this vehicle.');
+                return;
+            }
+
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+
+            // Validation
             if (!vehicleId || !startDate || !endDate) {
-                console.error('Missing booking data');
-                // Show user-friendly message
                 alert('Please select a vehicle and date range.');
                 return;
             }
 
-            // In a real app, gather user details if needed (e.g., from a logged-in session).
-            // For now, we'll simulate this.
+            if (new Date(endDate) <= new Date(startDate)) {
+                alert('End date must be after the start date.');
+                return;
+            }
+
+            // Simulate booking
+            console.log(`Booking vehicle ${vehicleId} from ${startDate} to ${endDate}`);
             const bookingData = {
                 vehicleId: vehicleId,
                 startDate: startDate,
@@ -324,22 +418,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 userId: 123, // Replace with actual user ID
             };
 
-             // Simulate sending booking data to backend (replace with actual API call)
-            console.log('Booking data:', bookingData);
-            // In a real application use:
-            // fetch('/api/bookings', { method: 'POST', body: JSON.stringify(bookingData) }) ...
-
-            // For now, simulate a successful booking:
             alert(`Vehicle ${vehicleId} booked successfully!`);
 
-            // You might redirect to a confirmation page or update UI.
-            //  This will eventually go to a payment page,
-            //  or perhaps an order confirmation page if payment is later
-            // window.location.href = 'booking-confirmation.html';
+            // Redirect to checkout
+            window.location.href = `checkout.html?vehicleId=${vehicleId}&startDate=${startDate}&endDate=${endDate}`;
+
         }
     });
 
-    // --- Form Submission ---
+    // --- Form Submission and Validation ---
     const handleFormSubmit = (formId) => {
         const form = document.getElementById(formId);
         if (!form) return;
@@ -526,6 +613,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    }
+    }// Initialize the map
+    const map = L.map('map').setView([17.3850, 78.4867], 12);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
 }); // End DOMContentLoaded
