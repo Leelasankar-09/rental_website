@@ -7,25 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p2Pw4RMYlRIky9sAuoQPRzb7gmK9yV0Vcgl/9fhDdnE="
+          crossorigin=""/>
 </head>
 <body>
 
-    <header class="header">
-        <a href="#home" class="logo"><span>Vr</span>oom</a>
-        <nav class="navbar">
+    <header class="header" style="padding: var(--spacing-medium); background-color: var(--primary-color); color: white;">
+        <a href="#home" class="logo" style="font-size: 2rem; font-weight: bold; color: white;"><span>Vr</span>oom</a>
+        <nav class="navbar" style="margin-left: auto;">
             <a href="#home">Home</a>
             <a href="#vehicles">Vehicles</a>
             <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
         </nav>
-        <div id="login">
+        <div id="login" style="margin-left: auto;">
             <button class="btn">Login</button>
-            <i class="fas fa-user"></i>
+            <i class="fas fa-user" style="margin-left: var(--spacing-small);"></i>
             <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
         </div>
     </header>
 
-    <div class="login-form-container form-container">
+    <div class="login-form-container form-container" style="background-color: white; padding: var(--spacing-large); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <span class="fas fa-times" id="close-login-form" aria-label="Close login form"></span>
         <form id="loginForm" aria-labelledby="login-heading">
             <h3 id="login-heading">User Login</h3>
@@ -43,7 +46,7 @@
         </form>
     </div>
 
-    <div class="sign-form-container form-container">
+    <div class="sign-form-container form-container" style="background-color: white; padding: var(--spacing-large); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <span class="fas fa-times" id="close-sign-form" aria-label="Close signup form"></span>
         <form id="signupForm" aria-labelledby="signup-heading">
             <h3 id="signup-heading">User Signup</h3>
@@ -72,12 +75,6 @@
         </form>
     </div>
 
-    <main>
-        <section class="home" id="home">
-            <h1 data-speed="-2">Find Your Ride</h1>
-            <img src="assets/pic1.png" alt="Hero image featuring a car or bike" data-speed="5">
-            <a href="#vehicles" class="btn" data-speed="7">Explore Rides</a>
-        </section>
 
         <section class="icons-container">
             <div class="icons">
@@ -124,82 +121,178 @@
             </div>
         </section>
 
-        <section class="vehicle" id="vehicles">
+        <section class="vehicle" id="vehicles" style="padding: var(--spacing-large) 0; text-align: center;">
             <h1 class="heading">Popular <span>Vehicles</span></h1>
-            <div class="vehicle-toggle" role="tablist">
+            <div class="vehicle-type-toggle" role="tablist" style="margin-bottom: var(--spacing-medium);">
                 <input type="radio" id="bikes-toggle" name="vehicle-type" checked aria-controls="bikes-slider">
-                <label for="bikes-toggle" role="tab" aria-selected="true" id="bikes-tab">Bikes</label>
+                <label for="bikes-toggle" role="tab" aria-selected="true" id="bikes-tab" style="padding: var(--spacing-small) var(--spacing-medium); background-color: var(--secondary-color); color: white; border-radius: 4px;">Bikes</label>
 
                 <input type="radio" id="cars-toggle" name="vehicle-type" aria-controls="cars-slider">
-                <label for="cars-toggle" role="tab" aria-selected="false" id="cars-tab">Cars</label>
+                <label for="cars-toggle" role="tab" aria-selected="false" id="cars-tab" style="padding: var(--spacing-small) var(--spacing-medium); background-color: var(--secondary-color); color: white; border-radius: 4px;">Cars</label>
+            </div>
+            <div class="filter-controls" style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-medium); margin-bottom: var(--spacing-medium);">
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="min-price" style="margin-right: var(--spacing-extra-small);">Min Price:</label>
+                    <input type="number" id="min-price" class="form-control" placeholder="Min" min="0" style="width: 80px;">
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="max-price" style="margin-right: var(--spacing-extra-small);">Max Price:</label>
+                    <input type="number" id="max-price" class="form-control" placeholder="Max" min="0" style="width: 80px;">
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="min-duration" style="margin-right: var(--spacing-extra-small);">Min Duration (days):</label>
+                    <input type="number" id="min-duration" class="form-control" placeholder="Min" min="1" style="width: 50px;">
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="max-duration" style="margin-right: var(--spacing-extra-small);">Max Duration (days):</label>
+                    <input type="number" id="max-duration" class="form-control" placeholder="Max" min="1" style="width: 50px;">
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="availability" style="margin-right: var(--spacing-extra-small);">Available:</label>
+                    <input type="checkbox" id="availability" class="form-check-input" checked>
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="fuel-type-filter" style="margin-right: var(--spacing-extra-small);">Fuel Type:</label>
+                    <select id="fuel-type-filter" class="form-control" style="min-width: 100px;">
+                        <option value="All">All</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="display: flex; align-items: center; gap: var(--spacing-small);">
+                    <label for="location-filter" style="margin-right: var(--spacing-extra-small);">Location:</label>
+                    <select id="location-filter" class="form-control" style="min-width: 120px;">
+                        <option value="All Locations">All Locations</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Kochi">Kochi</option>
+                        <option value="Chennai">Chennai</option>
+                    </select>
+                </div>
+                <button id="apply-filters" class="btn" style="margin-left: auto;">Apply Filters</button>
             </div>
 
-            <div id="bikes-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="bikes-tab">
+
+
+
+            <div class="location-filter">
+                <label for="location-filter">Select Location:</label>
+                <select id="location-filter" class="box">
+                    <option value="all">All Locations</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Kochi">Kochi</option>
+                    <option value="Chennai">Chennai</option>
+                </select>
+            </div>
+
+            <!-- Bikes Slider - To be populated dynamically from the backend -->
+            <div id="bikes-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="bikes-tab" style="padding-bottom: 50px;">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide box">
+                    <div class="swiper-slide box" data-vehicle-id="1">
                         <img src="assets/bike-1.png" alt="Royal Enfield Classic 350">
                         <div class="content">
                             <h3>Royal Enfield Classic 350</h3>
+                            
+                            
                             <div class="price">₹ 800<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
                                 <span class="fas fa-tachometer-alt"></span> 40 km/l
                                 <span class="fas fa-cogs"></span> Manual
                             </p>
-                            <a href="payment.html?type=bike&vehicle=Royal%20Enfield%20Classic%20350&price=800" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-1">Start Date:</label>
+                                <input type="date" id="start-date-1" name="start-date" min="2024-01-01" required>
+                                <label for="end-date-1">End Date:</label>
+                                <input type="date" id="end-date-1" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="1">Rent Now</button>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
+
+                    <div class="swiper-slide box" data-vehicle-id="2">
                         <img src="assets/bike-2.png" alt="Bajaj Pulsar 150">
                         <div class="content">
                             <h3>Bajaj Pulsar 150</h3>
+                            
+                            
                             <div class="price">₹ 600<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
                                 <span class="fas fa-tachometer-alt"></span> 50 km/l
                                 <span class="fas fa-cogs"></span> Manual
                             </p>
-                            <a href="payment.html?type=bike&vehicle=Bajaj%20Pulsar%20150&price=600" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-2">Start Date:</label>
+                                <input type="date" id="start-date-2" name="start-date"  required>
+                                <label for="end-date-2">End Date:</label>
+                                <input type="date" id="end-date-2" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="2">Rent Now</button>
                         </div>
                     </div>
-                     <div class="swiper-slide box">
+
+                    <div class="swiper-slide box" data-vehicle-id="3">
                         <img src="assets/bike-3.png" alt="KTM Duke 200">
                         <div class="content">
                             <h3>KTM Duke 200</h3>
+                            
+                            
                             <div class="price">₹ 900<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
                                 <span class="fas fa-tachometer-alt"></span> 35 km/l
                                 <span class="fas fa-cogs"></span> Manual
                             </p>
-                            <a href="payment.html?type=bike&vehicle=KTM%20Duke%20200&price=900" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-3">Start Date:</label>
+                                <input type="date" id="start-date-3" name="start-date"  required>
+                                <label for="end-date-3">End Date:</label>
+                                <input type="date" id="end-date-3" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="3">Rent Now</button>
                         </div>
                     </div>
-                     <div class="swiper-slide box">
+
+                    <div class="swiper-slide box" data-vehicle-id="4">
                         <img src="assets/bike-4.png" alt="Honda CB Shine">
                         <div class="content">
                             <h3>Honda CB Shine</h3>
+                            
+                            
                             <div class="price">₹ 500<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
                                 <span class="fas fa-tachometer-alt"></span> 65 km/l
                                 <span class="fas fa-cogs"></span> Manual
                             </p>
-                            <a href="payment.html?type=bike&vehicle=Honda%20CB%20Shine&price=500" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-4">Start Date:</label>
+                                <input type="date" id="start-date-4" name="start-date"  required>
+                                <label for="end-date-4">End Date:</label>
+                                <input type="date" id="end-date-4" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="4">Rent Now</button>
                         </div>
                     </div>
-                    </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
+                </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
             </div>
 
-            <div id="cars-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="cars-tab" hidden>
+             <!-- Cars Slider - To be populated dynamically from the backend -->
+             <div id="cars-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="cars-tab" hidden style="padding-bottom: 50px;">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide box">
+                    <div class="swiper-slide box" data-vehicle-id="5">
                         <img src="assets/car-1.png" alt="Maruti Suzuki Swift">
                         <div class="content">
                             <h3>Maruti Suzuki Swift</h3>
+                            
+                            
                             <div class="price">₹ 1200<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
@@ -208,13 +301,23 @@
                                 <span class="fas fa-gas-pump"></span> Petrol
                                 <span class="fas fa-road"></span> Automatic
                             </p>
-                            <a href="payment.html?type=car&vehicle=Maruti%20Suzuki%20Swift&price=1200" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-5">Start Date:</label>
+                                <input type="date" id="start-date-5" name="start-date"  required>
+                                <label for="end-date-5">End Date:</label>
+                                <input type="date" id="end-date-5" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="5">Rent Now</button>
                         </div>
                     </div>
-                     <div class="swiper-slide box">
+
+                     <div class="swiper-slide box" data-vehicle-id="6">
                         <img src="assets/car-2.png" alt="Hyundai Creta">
                         <div class="content">
                             <h3>Hyundai Creta</h3>
+                            
+                            
                             <div class="price">₹ 1800<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
@@ -223,13 +326,23 @@
                                 <span class="fas fa-gas-pump"></span> Diesel
                                 <span class="fas fa-road"></span> Manual
                             </p>
-                            <a href="payment.html?type=car&vehicle=Hyundai%20Creta&price=1800" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-6">Start Date:</label>
+                                <input type="date" id="start-date-6" name="start-date"  required>
+                                <label for="end-date-6">End Date:</label>
+                                <input type="date" id="end-date-6" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="6">Rent Now</button>
                         </div>
                     </div>
-                     <div class="swiper-slide box">
+
+                     <div class="swiper-slide box" data-vehicle-id="7">
                         <img src="assets/car-3.png" alt="Kia Seltos">
                         <div class="content">
                             <h3>Kia Seltos</h3>
+                            
+                            
                             <div class="price">₹ 1900<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
@@ -238,13 +351,23 @@
                                 <span class="fas fa-gas-pump"></span> Petrol
                                 <span class="fas fa-road"></span> Automatic
                             </p>
-                            <a href="payment.html?type=car&vehicle=Kia%20Seltos&price=1900" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-7">Start Date:</label>
+                                <input type="date" id="start-date-7" name="start-date"  required>
+                                <label for="end-date-7">End Date:</label>
+                                <input type="date" id="end-date-7" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="7">Rent Now</button>
                         </div>
                     </div>
-                     <div class="swiper-slide box">
+
+                     <div class="swiper-slide box" data-vehicle-id="8">
                         <img src="assets/car-4.png" alt="Mahindra XUV700">
                         <div class="content">
                             <h3>Mahindra XUV700</h3>
+                            
+                            
                             <div class="price">₹ 2500<span>/day</span></div>
                             <p>
                                 <span class="fas fa-check-circle"></span> Available
@@ -253,32 +376,48 @@
                                 <span class="fas fa-gas-pump"></span> Diesel
                                 <span class="fas fa-road"></span> Manual
                             </p>
-                            <a href="payment.html?type=car&vehicle=Mahindra%20XUV700&price=2500" class="btn">Rent Now</a>
+                            <!-- Booking logic to be implemented in script.js -->
+                            <div class="booking-dates">
+                                <label for="start-date-8">Start Date:</label>
+                                <input type="date" id="start-date-8" name="start-date"  required>
+                                <label for="end-date-8">End Date:</label>
+                                <input type="date" id="end-date-8" name="end-date"  required>
+                            </div>
+                            <button class="btn rent-now-btn" data-vehicle-id="8">Rent Now</button>
                         </div>
                     </div>
-                    </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
+                </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
             </div>
         </section>
 
-        <section class="newsletter">
+        <section class="map-container" id="map" style="height: 500px; position: relative; overflow: hidden; border-radius: 8px; margin: var(--spacing-large) 0;">
+            <div id="map" style="height: 100%;"></div>
+            <!-- Optional: Location search bar -->
+            <input type="text" id="location-search" placeholder="Enter location" style="position: absolute; top: 10px; left: 10px; z-index: 1000; padding: var(--spacing-small); border-radius: 4px; border: 1px solid var(--border-color);">
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter" style="padding: var(--spacing-large); background-color: var(--light-bg); text-align: center;">
             <h3 id="newsletter-heading">Subscribe for Latest Updates</h3>
             <p>Stay informed about new vehicles, special offers, and rental tips.</p>
+            <!-- Form submission handling and backend integration to be implemented -->
             <form action="" aria-labelledby="newsletter-heading">
                 <label for="newsletterEmail" class="visually-hidden">Enter your email address</label>
+
                 <input type="email" id="newsletterEmail" placeholder="Enter your email" class="box" required aria-required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                 <button type="submit" class="btn">Subscribe</button>
                 </form>
         </section>
 
-        <section class="reviews" id="reviews">
+        <section class="reviews" id="reviews" style="padding: var(--spacing-large) 0;">
             <h1 class="heading">Client's <span>Review</span></h1>
-            <div class="reviews-slider swiper">
+            <div class="reviews-slider swiper" style="padding-bottom: 50px;">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide box">
-                        <img src="assets/p1.jpeg" alt="Client photo of Rahul Sharma">
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <img src="assets/p1.jpeg" alt="Client photo of Rahul Sharma" style="width: 100px; height: 100px; border-radius: 50%;">
                         <div class="content">
                             <p>Vroom exceeded my expectations! The bikes were amazing, and the booking process was incredibly smooth. Highly recommend!</p>
                             <h3>Rahul Sharma</h3>
@@ -291,8 +430,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
-                        <img src="assets/p2.jpeg" alt="Client photo of Priya Menon">
+                    <!-- Review 1 -->
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                         <img src="{{review1.image}}" alt="Client photo of {{review1.name}}">
                         <div class="content">
                             <p>The variety of cars available is fantastic! I found the perfect ride for my trip. Great service from pick-up to drop-off.</p>
                             <h3>Priya Menon</h3>
@@ -305,8 +445,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
-                        <img src="assets/p3.jpeg" alt="Client photo of Arjun Reddy">
+                    <!-- Review 2 -->
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                         <img src="{{review2.image}}" alt="Client photo of {{review2.name}}">
                         <div class="content">
                             <p>Super easy to rent, bikes in top condition.</p>
                             <h3>Arjun Reddy</h3>
@@ -319,8 +460,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
-                        <img src="assets/p4.jpeg" alt="Client photo of Sneha Patil">
+                    <!-- Review 3 -->
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                         <img src="{{review3.image}}" alt="Client photo of {{review3.name}}">
                         <div class="content">
                             <p>Cars were clean and reliable!</p>
                             <h3>Sneha Patil</h3>
@@ -333,8 +475,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
-                        <img src="assets/p5.jpeg" alt="Client photo of Vikram Singh">
+                    <!-- Review 4 -->
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                         <img src="{{review4.image}}" alt="Client photo of {{review4.name}}">
                         <div class="content">
                             <p>Best rental experience in Hyderabad!</p>
                             <h3>Vikram Singh</h3>
@@ -347,8 +490,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide box">
-                        <img src="assets/p6.jpeg" alt="Client photo of Ananya Rao">
+                    <!-- Review 5 -->
+                    <div class="swiper-slide box" style="background-color: white; padding: var(--spacing-medium); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                         <img src="{{review5.image}}" alt="Client photo of {{review5.name}}">
                         <div class="content">
                             <p>Affordable bikes, great support.</p>
                             <h3>Ananya Rao</h3>
@@ -363,7 +507,8 @@
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
-                </div>
+            </div>
+        </section>
 
             <div class="add-review-container">
                 <h2 class="heading" id="add-review-heading">Add Your <span>Review</span></h2>
@@ -396,17 +541,17 @@
                         </div>
                     </div>
                     <button type="submit" class="btn">Submit Review</button>
-                    <p id="reviewSubmissionMessage" class="form-message" role="status" aria-live="polite"></p>
+                    <p id="reviewSubmissionMessage" class="form-message" role="status" aria-live="polite"></p>  <!-- Placeholder for submission message -->
                 </form>
             </div>
             </section>
-
         <section class="contact" id="contact">
             <h1 class="heading"><span>Contact</span> Us</h1>
             <div class="row">
                 <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125898.90884481995!2d76.39160190273439!3d9.092141999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0602f7573df13d%3A0xf84205c7d851897f!2sAmritapuri%2C%20Kerala!5e0!3m2!1sen!2sin!4v1713423442551!5m2!1sen!2sin"
                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade" title="Google Map showing location of Amritapuri, Kerala, India" aria-label="Google Map showing location of Amritapuri, Kerala, India"></iframe>
+                <!-- Contact Form -->
                 <form action="" aria-labelledby="contact-heading">
                     <h3 id="contact-heading">Get in Touch</h3>
                     <div class="inputBox">
@@ -426,6 +571,7 @@
                         <textarea id="contactMessage" placeholder="Message" class="box" cols="30" rows="10" required aria-required="true"></textarea>
                     </div>
                     <button type="submit" class="btn">Send Message</button>
+                    <!-- Form submission handling and backend integration to be implemented -->
                     </form>
             </div>
         </section>
@@ -471,6 +617,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
 
 </body>
 </html>

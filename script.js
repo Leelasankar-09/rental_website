@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Vehicle Data with Locations ---
+    const vehicleData = {
+       bikes: [
+           { id: 1, imgSrc: 'assets/bikes/bike1.png', title: 'Royal Enfield Classic 350', price: 800, details: [{icon:'fas fa-tachometer-alt', text:'40 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Hyderabad', duration: 7, available: true },
+           { id: 2, imgSrc: 'assets/bikes/bike2.png', title: 'Bajaj Pulsar 150', price: 600, details: [{icon:'fas fa-tachometer-alt', text:'50 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Kochi', duration: 14, available: true },
+           { id: 3, imgSrc: 'assets/bikes/bike3.png', title: 'KTM Duke 200', price: 900, details: [{icon:'fas fa-tachometer-alt', text:'35 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Chennai', duration: 30, available: true },
+           { id: 4, imgSrc: 'assets/bikes/bike4.png', title: 'Honda CB Shine', price: 500, details: [{icon:'fas fa-tachometer-alt', text:'65 km/l'}, {icon:'fas fa-cogs', text:'Manual'}], location: 'Hyderabad', duration: 7, available: false },
+       ],
+       cars: [
+           { id: 5, imgSrc: 'assets/cars/b1.jpg', title: 'Maruti Suzuki Swift', price: 1200, details: [{icon:'fas fa-tachometer-alt', text:'20k km'}, {icon:'fas fa-car', text:'2019'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}], location: 'Chennai', duration: 14, available: true },
+           { id: 6, imgSrc: 'assets/cars/b2.png', title: 'Hyundai Creta', price: 1800, details: [{icon:'fas fa-tachometer-alt', text:'15k km'}, {icon:'fas fa-car', text:'2020'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}], location: 'Kochi', duration: 30, available: true },
+           { id: 7, imgSrc: 'assets/cars/b3.png', title: 'Kia Seltos', price: 1900, details: [{icon:'fas fa-tachometer-alt', text:'10k km'}, {icon:'fas fa-car', text:'2021'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Automatic'}], location: 'Hyderabad', duration: 7, available: true },
+           { id: 8, imgSrc: 'assets/cars/b4.png', title: 'Mahindra XUV700', price: 2500, details: [{icon:'fas fa-tachometer-alt', text:'8k km'}, {icon:'fas fa-car', text:'2022'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-road', text:'Manual'}], location: 'Chennai', duration: 14, available: false },
+       ]
+   };
+
     // --- Variable Declarations ---
     const loginBtn = document.querySelector('#login .btn');
     const userIcon = document.querySelector('#login .fa-user'); // Might be menu icon on mobile
@@ -21,6 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const vehicleTypeRadios = document.querySelectorAll('input[name="vehicle-type"]');
     const bikesSliderEl = document.getElementById('bikes-slider');
     const carsSliderEl = document.getElementById('cars-slider');
+    const locationFilter = document.getElementById('location-filter');
+
+    //Filter Controls
+    const minPriceInput = document.getElementById('min-price');
+    const maxPriceInput = document.getElementById('max-price');
+    const minDurationInput = document.getElementById('min-duration');
+    const maxDurationInput = document.getElementById('max-duration');
+    const availabilityCheckbox = document.getElementById('availability');
+    const applyFiltersButton = document.getElementById('apply-filters');
 
     const featuredVehicleTypeRadios = document.querySelectorAll('input[name="featured-vehicle-type"]');
     const featuredBikesSliderEl = document.getElementById('featured-bikes-slider');
@@ -49,7 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     menuIcon.onclick = () => {
         navbar.classList.toggle('active');
-        menuIcon.classList.toggle('fa-times'); // Optional: change icon to 'X'
+        if (navbar.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+        // Add logic here to highlight the active menu item
     };
 
     // Adjust menu icon visibility on resize
@@ -221,27 +253,38 @@ document.addEventListener('DOMContentLoaded', () => {
     handleVehicleToggle(featuredVehicleTypeRadios, featuredBikesSliderEl, featuredCarsSliderEl, featuredBikesSwiper, featuredCarsSwiper);
 
 
-    // --- Placeholder Content Population (Example) ---
-    // !! IMPORTANT !!: Replace this with your actual data loading mechanism (e.g., fetch from API)
-    function populateSlider(swiperWrapperSelector, items) {
-        const wrapper = document.querySelector(swiperWrapperSelector);
-        if (!wrapper) return;
+    function populateSlider(wrapper, items) { // Simpler: Directly use the wrapper element
         wrapper.innerHTML = ''; // Clear existing placeholders
 
+        // Simulate fetching data from an API (replace with actual API call)
+        // In a real application, use:  fetch('/api/vehicles') ...
+        // For now, we use the 'items' argument, assuming it's the fetched data.
+
         items.forEach(item => {
+          // Ensure item.id is defined before using it
+          const vehicleId = item.id;
             const slide = `
-                <div class="swiper-slide">
-                    <div class="box">
-                        <img src="${item.imgSrc}" alt="${item.title}">
-                        <h3>${item.title}</h3>
+                <div class="swiper-slide" data-vehicle-id="${vehicleId}">  <!-- Add vehicle ID -->
+                        <img src="${item.imgSrc}" alt="${item.title}" loading="lazy">
+                        <!-- When integrating with a backend:
+                             - Optimize images (resize, compress, use WebP format) before serving. -->
+                       
+                       <h3>${item.title}</h3>
                         <div class="price">${item.price} <span>/day</span></div>
+                         <div class="booking-dates">
+                            <label for="start-date-${vehicleId}">Start Date:</label>
+                            <input type="date" id="start-date-${vehicleId}" class="box" required>
+                            <label for="end-date-${vehicleId}">End Date:</label>
+                            <input type="date" id="end-date-${vehicleId}" class="box" required>
+                        </div>
                         <p>
-                           ${item.details.map(d => `<div><i class="${d.icon}"></i> ${d.text}</div>`).join('')}
+                            ${item.details.map(d => `<div><i class="${d.icon}"></i> ${d.text}</div>`).join('')}
                         </p>
                         ${item.stars ? `<div class="stars">${'<i class="fas fa-star"></i>'.repeat(Math.floor(item.stars))}${(item.stars % 1 !== 0) ? '<i class="fas fa-star-half-alt"></i>' : ''}</div>` : ''}
-                        <a href="#" class="btn">Check Out</a>
-                    </div>
-                </div>
+                        <div class="booking-actions">
+                            <button class="btn rent-now-btn" data-vehicle-id="${item.id}">Rent Now</button>
+                        </div>
+                 </div>
             `;
             wrapper.innerHTML += slide;
         });
@@ -253,68 +296,329 @@ document.addEventListener('DOMContentLoaded', () => {
          if (sliderId === 'featured-cars-slider' && featuredCarsSwiper) featuredCarsSwiper.update();
     }
 
-    // Example Data (Replace with your actual data)
-    const exampleBikes = [
-        { imgSrc: 'assets/bike1.jpg', title: 'Sport Bike X', price: '₹1500', details: [{icon:'fas fa-motorcycle', text:'250cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-tachometer-alt', text:'120kmph'}] },
-        { imgSrc: 'assets/bike2.jpg', title: 'Cruiser Classic', price: '₹1800', details: [{icon:'fas fa-motorcycle', text:'350cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-road', text:'Comfort'}] },
-        { imgSrc: 'assets/bike3.jpg', title: 'Scooter Zippy', price: '₹800', details: [{icon:'fas fa-motorcycle', text:'125cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-shopping-bag', text:'Storage'}] },
-        { imgSrc: 'assets/bike4.jpg', title: 'Mountain Trail', price: '₹2000', details: [{icon:'fas fa-motorcycle', text:'400cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-mountain', text:'Off-road'}] },
-        { imgSrc: 'assets/bike5.jpg', title: 'Electric Bolt', price: '₹1200', details: [{icon:'fas fa-motorcycle', text:'Electric'}, {icon:'fas fa-battery-full', text:'100km Range'}, {icon:'fas fa-leaf', text:'Eco-friendly'}] },
-    ];
-     const exampleCars = [
-        { imgSrc: 'assets/car1.jpg', title: 'Sedan Swift', price: '₹2500', details: [{icon:'fas fa-user-friends', text:'5 Seats'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-snowflake', text:'AC'}] },
-        { imgSrc: 'assets/car2.jpg', title: 'SUV Explorer', price: '₹4000', details: [{icon:'fas fa-user-friends', text:'7 Seats'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-suitcase-rolling', text:'Luggage'}] },
-        { imgSrc: 'assets/car3.jpg', title: 'Hatchback City', price: '₹2000', details: [{icon:'fas fa-user-friends', text:'4 Seats'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-parking', text:'Compact'}] },
-        { imgSrc: 'assets/car4.jpg', title: 'Luxury Drive', price: '₹6000', details: [{icon:'fas fa-user-friends', text:'5 Seats'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-star', text:'Premium'}] },
-        { imgSrc: 'assets/car5.jpg', title: 'Electric Aura', price: '₹3500', details: [{icon:'fas fa-user-friends', text:'5 Seats'}, {icon:'fas fa-battery-full', text:'300km Range'}, {icon:'fas fa-leaf', text:'Eco-friendly'}] },
-    ];
-     const featuredBikesData = [ // Example: Subset or different bikes
-        { imgSrc: 'assets/featured_bike1.jpg', title: 'Premium Racer', price: '₹2200', details: [{icon:'fas fa-motorcycle', text:'600cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-flag-checkered', text:'Track Ready'}], stars: 4.5 },
-        { imgSrc: 'assets/featured_bike2.jpg', title: 'Adventure Tourer', price: '₹2500', details: [{icon:'fas fa-motorcycle', text:'800cc'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-map-marked-alt', text:'Long Trips'}], stars: 5 },
-     ];
-      const featuredCarsData = [ // Example: Subset or different cars
-        { imgSrc: 'assets/featured_car1.jpg', title: 'Convertible Sun', price: '₹5500', details: [{icon:'fas fa-user-friends', text:'2 Seats'}, {icon:'fas fa-gas-pump', text:'Petrol'}, {icon:'fas fa-wind', text:'Open Top'}], stars: 4.5 },
-        { imgSrc: 'assets/featured_car2.jpg', title: 'Rugged 4x4', price: '₹4800', details: [{icon:'fas fa-user-friends', text:'5 Seats'}, {icon:'fas fa-gas-pump', text:'Diesel'}, {icon:'fas fa-mountain', text:'All-Terrain'}], stars: 5 },
-     ];
+    function filterVehicles(type, location) {
+        let filtered = vehicleData[type];
+        if (location !== 'All Locations') {
+            filtered = filtered.filter(vehicle => vehicle.location === location);
+        }
+        return filtered;
+    }
 
-    // Populate the sliders with example data
-    populateSlider('#bikes-slider .swiper-wrapper', exampleBikes);
-    populateSlider('#cars-slider .swiper-wrapper', exampleCars);
-    populateSlider('#featured-bikes-slider .swiper-wrapper', featuredBikesData);
-    populateSlider('#featured-cars-slider .swiper-wrapper', featuredCarsData);
-    
-    // --- Form Submission (Basic Example) ---
-    const handleFormSubmit = (formId, messageId) => {
-        const form = document.getElementById(formId);
-        const messageEl = document.getElementById(messageId);
-        if(form && messageEl) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault(); // Prevent actual submission for this example
-                // Add your validation logic here
-                const usernameInput = form.querySelector('input[type="text"], input[type="email"]'); // Simple check if first input is filled
-                
-                messageEl.style.display = 'block'; // Show message area
-                messageEl.classList.remove('success', 'error'); // Reset classes
-                
-                if(usernameInput && usernameInput.value.trim() !== '') {
-                     // Simulate success
-                     messageEl.textContent = 'Processing... (Submission successful!)';
-                     messageEl.classList.add('success'); 
-                     // Optionally close form after delay or redirect
-                     // setTimeout(() => {
-                     //     if(formId === 'loginForm') closeLoginForm();
-                     //     else closeSignupForm();
-                     // }, 2000);
-                } else {
-                     // Simulate error
-                     messageEl.textContent = 'Please fill in all required fields.';
-                     messageEl.classList.add('error');
-                }
+    // Function to apply filters
+    function applyFilters() {
+        const minPrice = parseInt(minPriceInput.value) || 0;
+        const maxPrice = parseInt(maxPriceInput.value) || Infinity;
+        const minDuration = parseInt(minDurationInput.value) || 0;
+        const maxDuration = parseInt(maxDurationInput.value) || Infinity;
+        const availability = availabilityCheckbox.checked;
+
+        // Fuel Type filtering (cars only)
+        const fuelTypeFilter = document.getElementById('fuel-type-filter');
+        const selectedFuelType = fuelTypeFilter ? fuelTypeFilter.value : 'All'; // Default to 'All' if not found
+
+        const selectedType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+
+        let filteredVehicles = vehicleData[selectedType];
+
+        if (selectedType === 'cars') { // Apply fuel type filter only for cars
+            filteredVehicles = filteredVehicles.filter(vehicle => {
+                const fuelTypeDetail = vehicle.details.find(detail => detail.icon === 'fas fa-gas-pump');
+                const vehicleFuelType = fuelTypeDetail ? fuelTypeDetail.text : 'Unknown'; // Handle missing info
+                return selectedFuelType === 'All' || vehicleFuelType === selectedFuelType;
             });
+        }
+
+        filteredVehicles = filteredVehicles.filter(vehicle =>
+            vehicle.price >= minPrice &&
+            vehicle.price <= maxPrice &&
+            vehicle.duration >= minDuration &&
+            vehicle.duration <= maxDuration &&
+            (availability ? vehicle.available : true)
+        );
+
+         populateSlider(document.querySelector(`#${selectedType}-slider .swiper-wrapper`), filteredVehicles);
+    }   
+
+
+    // Event listener for filter changes
+    if (applyFiltersButton) {
+        applyFiltersButton.addEventListener('click', applyFilters);
+    }
+
+    // Modify the vehicle type toggle function to call applyFilters after the toggle
+    function handleVehicleToggle(radios, bikesSliderElement, carsSliderElement, bikesSwiperInstance, carsSwiperInstance) {
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.id.includes('bikes') && radio.checked) {
+                    bikesSliderElement.style.display = 'block';
+                    carsSliderElement.style.display = 'none';
+                    if (bikesSwiperInstance) bikesSwiperInstance.update();
+                } else if (radio.id.includes('cars') && radio.checked) {
+                    bikesSliderElement.style.display = 'none';
+                    carsSliderElement.style.display = 'block';
+                    if (carsSwiperInstance) carsSwiperInstance.update();
+                }
+                applyFilters(); // Apply filters after vehicle type change
+            });
+        });
+    }
+
+    // Call applyFilters on page load to apply initial filters
+    applyFilters();
+
+
+    // --- Event Listeners and Initializations ---
+    // Location filter
+    if (locationFilter) {
+        locationFilter.addEventListener('change', () => {
+            const selectedLocation = locationFilter.value;
+            const selectedType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+            const filteredVehicles = filterVehicles(selectedType, selectedLocation);
+            populateSlider(document.querySelector(`#${selectedType}-slider .swiper-wrapper`), filteredVehicles);
+        });
+    }
+
+    // Initial population
+    const initialType = document.querySelector('input[name="vehicle-type"]:checked').id.includes('bikes') ? 'bikes' : 'cars';
+    populateSlider(document.querySelector(`#${initialType}-slider .swiper-wrapper`), filterVehicles(initialType, 'All Locations'));
+
+    // --- Booking Logic --
+    // Attach event listener to a parent element that exists on page load (e.g., document.body)
+    document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('rent-now-btn')) {
+            const vehicleId = event.target.dataset.vehicleId;
+            const startDateInput = document.getElementById(`start-date-${vehicleId}`);
+            const endDateInput = document.getElementById(`end-date-${vehicleId}`);
+
+            if (!startDateInput || !endDateInput) {
+                alert('Could not find date input fields for this vehicle.');
+                return;
+            }
+
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+
+            // Validation
+            if (!vehicleId || !startDate || !endDate) {
+                alert('Please select a vehicle and date range.');
+                return;
+            }
+
+            if (new Date(endDate) <= new Date(startDate)) {
+                alert('End date must be after the start date.');
+                return;
+            }
+
+            // Simulate booking
+            console.log(`Booking vehicle ${vehicleId} from ${startDate} to ${endDate}`);
+            const bookingData = {
+                vehicleId: vehicleId,
+                startDate: startDate,
+                endDate: endDate,
+                userId: 123, // Replace with actual user ID
+            };
+
+            alert(`Vehicle ${vehicleId} booked successfully!`);
+
+            // Redirect to checkout
+            window.location.href = `checkout.html?vehicleId=${vehicleId}&startDate=${startDate}&endDate=${endDate}`;
+
+        }
+    });
+
+    // --- Form Submission and Validation ---
+    const handleFormSubmit = (formId) => {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        const isLoginForm = formId === 'loginForm';
+        const isSignupForm = formId === 'signupForm';
+
+        const displayMessage = (message, isSuccess = false) => {
+            let messageEl;
+            if (isLoginForm) {
+                messageEl = document.getElementById('loginMessage');
+            } else if (isSignupForm) {
+                messageEl = document.getElementById('signupMessage');
+            }
+            if (messageEl) {
+                messageEl.textContent = message;
+                messageEl.className = isSuccess ? 'success-message' : 'error-message';
+                messageEl.style.display = 'block';
+            }
+        };
+
+        const clearMessages = () => {
+            if (isLoginForm) {
+                const messageEl = document.getElementById('loginMessage');
+                if (messageEl) {
+                    messageEl.textContent = '';
+                    messageEl.className = '';
+                    messageEl.style.display = 'none';
+                }
+            } else if (isSignupForm) {
+                const messageEl = document.getElementById('signupMessage');
+                if (messageEl) {
+                    messageEl.textContent = '';
+                    messageEl.className = '';
+                    messageEl.style.display = 'none';
+                }
+            }
+        };
+
+        // Submit listener
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearMessages();
+
+            let isValid = true;
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => (data[key] = value));
+
+            if (isLoginForm) {
+                if (!data.username || !data.password) {
+                    displayMessage('Please enter both username and password.');
+                    isValid = false;
+                }
+            } else if (isSignupForm) {
+                if (!data.name || !data.email || !data.password || !data.confirmPassword) {
+                    displayMessage('Please fill in all required fields.');
+                    isValid = false;
+                } else if (!data.email.includes('@')) {
+                    displayMessage('Please enter a valid email address.');
+                    isValid = false;
+                } else if (data.password.length < 6) {
+                    displayMessage('Password must be at least 6 characters long.');
+                    isValid = false;
+                } else if (data.password !== data.confirmPassword) {
+                    displayMessage('Passwords do not match.');
+                    isValid = false;
+                }
+            }
+
+            // If the form is valid, submit the data
+            if (isValid) {
+                // Prepare data for sending
+                console.log('Form data submitted:', data);
+
+                // Simulate sending data to the backend (replace with actual API call)
+                // Example with fetch:
+                // fetch('/api/users', { method: 'POST', body: JSON.stringify(data) })
+                //   .then(response => response.json())
+                //   .then(result => {
+                //     if (result.success) {
+                //       displayMessage('Submission successful!', true);
+                //       //  Handle success (e.g., redirect, update UI)
+                //     } else {
+                //       displayMessage(result.error || 'An error occurred.', false);
+                //     }
+                //   });
+
+                // Optionally reset the form after a delay:
+                setTimeout(() => {
+                    form.reset();
+                    clearMessages();
+                    if (isLoginForm) {
+                        closeLoginForm();
+                    } else if (isSignupForm) {
+                        closeSignupForm();
+                    }
+                    // After successful signup, you might redirect to login:
+                    // if (isSignupForm) openLoginForm();
+
+                }, 2000);
+            }
+        });
+
+        // Input focus states
+        form.querySelectorAll('input').forEach(input => {
+            // Add the 'focused' class on focus to apply specific styling (e.g., highlighting)
+            input.addEventListener('focus', () => input.classList.add('focused'));
+            input.addEventListener('blur', () => input.classList.remove('focused'));
+        });
+
+          // Initial styling consistency - you might need to adjust CSS based on your styles.css
+          if (isSignupForm) {
+          form.classList.add('signup-form'); // Add a class for signup form specific styling if needed.
         }
     };
     
     handleFormSubmit('loginForm', 'loginMessage');
     handleFormSubmit('signupForm', 'signupMessage');
+
+    // --- Payment Page Logic ---
+    if (window.location.pathname.endsWith('payment.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const vehicleType = urlParams.get('type');
+        const vehicleName = urlParams.get('vehicle');
+        const vehiclePrice = urlParams.get('price');
+
+        if (vehicleType && vehicleName && vehiclePrice) {
+            const vehicleImage = document.querySelector('.vehicle-image');
+            const vehicleDetails = document.querySelector('.vehicle-details');
+
+            let imageSrc = 'assets/placeholder-vehicle.jpg'; // Default placeholder
+            if (vehicleType === 'bike') {
+                // You might have specific bike images, adjust paths as needed
+                imageSrc = 'assets/bike-placeholder.jpg'; // Example
+            } else if (vehicleType === 'car') {
+                // Adjust car image paths if available
+                imageSrc = 'assets/car-placeholder.jpg'; // Example
+            }
+
+            if (vehicleImage) {
+                vehicleImage.src = imageSrc;
+                vehicleImage.alt = vehicleName;
+            }
+
+            if (vehicleDetails) {
+                vehicleDetails.innerHTML = `<h2>${vehicleName}</h2><p>Type: ${vehicleType}, Price: ₹${vehiclePrice}/day</p>`;
+            }
+        }
+
+        // Date and Cost Calculation
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const totalAmountSpan = document.getElementById('totalAmount');
+
+        const calculateTotalCost = () => {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (startDate && endDate && !isNaN(startDate.getTime()) && !isNaN(endDate.getTime()) && vehiclePrice) {
+                const timeDiff = Math.abs(endDate - startDate);
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                const totalPrice = daysDiff * parseFloat(vehiclePrice);
+
+                totalAmountSpan.textContent = totalPrice.toLocaleString('en-IN', {
+                    style: 'currency',
+                    currency: 'INR', // Replace with your currency code if needed
+                });
+            } else {
+                totalAmountSpan.textContent = '₹0.00'; // Reset or handle invalid input
+            }
+        };
+
+        // Initial calculation (in case dates are pre-filled or to initialize the display)
+        calculateTotalCost();
+
+        // Event listeners for date changes
+        if (startDateInput && endDateInput) {
+            startDateInput.addEventListener('change', calculateTotalCost);
+            endDateInput.addEventListener('change', calculateTotalCost);
+        } else {
+            console.error('Start or end date input not found in payment.html');
+        }
+
+
+
+    }// Initialize the map
+    const map = L.map('map').setView([17.3850, 78.4867], 12);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
 }); // End DOMContentLoaded

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Vroom Sections Snippet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -182,6 +183,439 @@
         </div>
     </section>
 
+=======
+    <!-- Updated Title -->
+    <title>Vroom - Our Vehicles</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to main styles.css -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+     /* Add style for view-all-link if not present in styles.css */
+     .heading-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem; /* Adjust as needed */
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+     }
+     .heading-container .heading {
+         margin-bottom: 0; /* Remove default bottom margin */
+     }
+     .view-all-link {
+        font-size: 1.4rem; /* Smaller font size */
+        color: var(--blue); /* Use variable from styles.css */
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--blue);
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+        margin-left: 1rem; /* Add some space */
+        white-space: nowrap; /* Prevent wrapping */
+    }
+    .view-all-link i {
+        margin-left: 0.5rem;
+    }
+    .view-all-link:hover {
+        background-color: var(--blue);
+        color: #fff;
+    }
+    @media (max-width: 768px) {
+        .heading-container {
+            justify-content: center; /* Center items on smaller screens */
+            gap: 1rem;
+        }
+        .view-all-link {
+            margin-left: 0;
+        }
+    }
+    /* Ensure sliders take up space initially to avoid layout shifts */
+    #bikes-slider,
+    #cars-slider {
+        min-height: 300px; /* Adjust as needed */
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header from index.html -->
+    <header class="header">
+        <a href="index.html#home" class="logo"><span>Vr</span>oom</a> <!-- Link back to index.html home -->
+        <nav class="navbar">
+            <a href="index.html#home">Home</a> <!-- Link back to index.html home -->
+            <a href="index.html#vehicles">Vehicles</a> <!-- Link back to index.html vehicles -->
+            <a href="index.html#reviews">Reviews</a> <!-- Link back to index.html reviews -->
+            <a href="index.html#contact">Contact</a> <!-- Link back to index.html contact -->
+        </nav>
+        <div id="login">
+            <button class="btn">Login</button>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
+        </div>
+    </header>
+
+    <!-- Login/Signup Forms from index.html -->
+    <div class="login-form-container form-container">
+        <span class="fas fa-times" id="close-login-form" aria-label="Close login form"></span>
+        <form id="loginForm" aria-labelledby="login-heading">
+            <h3 id="login-heading">User Login</h3>
+            <div class="inputBox"><label for="loginUsername">Username:</label><input type="text" id="loginUsername" placeholder="Enter Username here" class="box" required aria-required="true"></div>
+            <div class="inputBox"><label for="loginPassword">Password:</label><input type="password" id="loginPassword" placeholder="Enter Password here" class="box" required aria-required="true"></div>
+            <button type="submit" class="btn">Login now</button>
+            <p>Don't have an account? <a href="#" id="signupLink">Create One</a></p>
+            <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+    <div class="sign-form-container form-container">
+        <span class="fas fa-times" id="close-sign-form" aria-label="Close signup form"></span>
+        <form id="signupForm" aria-labelledby="signup-heading">
+            <h3 id="signup-heading">User Signup</h3>
+            <div class="inputBox"><label for="signupEmail">Email:</label><input type="email" id="signupEmail" placeholder="Enter E-mail here" class="box" required aria-required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"><span class="error-message"></span></div>
+            <div class="inputBox"><label for="signupName">Full Name:</label><input type="text" id="signupName" placeholder="Enter your Name here" class="box" required aria-required="true"></div>
+            <div class="inputBox"><label for="signupUsername">Username:</label><input type="text" id="signupUsername" placeholder="Enter your Username here" class="box" required aria-required="true"></div>
+            <div class="inputBox"><label for="signupPassword">Password:</label><input type="password" id="signupPassword" placeholder="Enter Password here" class="box" required aria-required="true"></div>
+            <div class="inputBox"><label for="signupConfirmPassword">Confirm Password:</label><input type="password" id="signupConfirmPassword" placeholder="Retype Password" class="box" required aria-required="true"><span class="error-message"></span></div>
+            <button type="submit" class="btn">Signup</button>
+            <p id="signupMessage" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+
+    <!-- Main Content Area -->
+    <main style="padding-top: 8rem;"> <!-- Add padding to avoid overlap with fixed header -->
+
+        <!-- Icons Container from original file -->
+        <section class="icons-container">
+            <div class="icons">
+                <i class="fas fa-home"></i><div class="content"><h3>150+</h3><p>branches</p></div>
+            </div>
+            <div class="icons">
+                <i class="fas fa-car"></i><div class="content"><h3>4770+</h3><p>cars sold</p></div>
+            </div>
+            <div class="icons">
+                <i class="fas fa-users"></i><div class="content"><h3>590+</h3><p>happy clients</p></div>
+            </div>
+            <div class="icons">
+                <i class="fas fa-motorcycle"></i><div class="content"><h3>890+</h3><p>new bikes</p></div>
+            </div>
+        </section>
+
+        <!-- Combined Vehicle Section (using index.html structure) -->
+        <section class="vehicle" id="vehicles">
+            <div class="heading-container">
+                 <h1 class="heading">Our <span>Vehicles</span></h1>
+                 <!-- View All links can go here if needed globally, or within specific sections -->
+            </div>
+           
+            <div class="vehicle-toggle" role="tablist">
+                <input type="radio" id="bikes-toggle" name="vehicle-type" checked aria-controls="bikes-slider">
+                <label for="bikes-toggle" role="tab" aria-selected="true" id="bikes-tab">Bikes</label>
+
+                <input type="radio" id="cars-toggle" name="vehicle-type" aria-controls="cars-slider">
+                <label for="cars-toggle" role="tab" aria-selected="false" id="cars-tab">Cars</label>
+            </div>
+
+            <!-- Bikes Slider -->
+            <div id="bikes-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="bikes-tab">
+                 <div class="heading-container" style="margin-bottom: 1rem; padding: 0 1rem;"> <!-- Heading specific to bikes -->
+                     <h2 class="heading" style="font-size: 2rem; text-align: left;">Popular <span>Bikes</span></h2>
+                     <a href="webpages/webpage5.html" class="view-all-link">View all bikes <i class="fas fa-arrow-right"></i></a>
+                 </div>
+                <div class="swiper-wrapper">
+                    <!-- Bike 1 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/bike1.png" alt="Bike 1 - Sport Tourer Z1">
+                        <div class="content">
+                            <h3>Sport Tourer Z1</h3>
+                            <div class="price">$15,000 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 120mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Bike 2 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/bike2.png" alt="Bike 2 - Urban Cruiser R2">
+                        <div class="content">
+                            <h3>Urban Cruiser R2</h3>
+                            <div class="price">$18,000 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 130mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Bike 3 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/bike3.png" alt="Bike 3 - Adventure Pro X3">
+                        <div class="content">
+                            <h3>Adventure Pro X3</h3>
+                            <div class="price">$16,500 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 125mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Bike 4 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/bike4.png" alt="Bike 4 - Speed Demon S4">
+                        <div class="content">
+                            <h3>Speed Demon S4</h3>
+                            <div class="price">$22,000 <span>(Est.)</span></div>
+                             <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 150mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Bike 5 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/bike5.png" alt="Bike 5 - Classic Rider C5">
+                        <div class="content">
+                            <h3>Classic Rider C5</h3>
+                            <div class="price">$19,000 <span>(Est.)</span></div>
+                             <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 140mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+
+                     <!-- Bike 6 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/bike6.png" alt="Bike 6 - Electric Bolt E6">
+                        <div class="content">
+                            <h3>Electric Bolt E6</h3>
+                            <div class="price">$25,000 <span>(Est.)</span></div>
+                             <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Electric
+                                <span class="fas fa-circle"></span> 110mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+
+                     <!-- Bike 7 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/bike7.png" alt="Bike 7 - Trail Master T7">
+                        <div class="content">
+                            <h3>Trail Master T7</h3>
+                            <div class="price">$17,500 <span>(Est.)</span></div>
+                             <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 115mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+
+                     <!-- Bike 8 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/bike8.png" alt="Bike 8 - Commuter Ace A8">
+                        <div class="content">
+                            <h3>Commuter Ace A8</h3>
+                            <div class="price">$14,000 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 100mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Bike 9 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/bike9.png" alt="Bike 9 - Bike Model X9">
+                        <div class="content">
+                            <h3>Bike Model X9</h3>
+                            <div class="price">$20,000 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New
+                                <span class="fas fa-circle"></span> 2024
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 145mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Bike 10 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/bike10.png" alt="Bike 10 - Bike Model X10">
+                        <div class="content">
+                            <h3>Bike Model X10</h3>
+                            <div class="price">$22,000 <span>(Est.)</span></div>
+                            <p>
+                                <span class="fas fa-circle"></span> New
+                                <span class="fas fa-circle"></span> 2024
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 155mph
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!-- Cars Slider -->
+            <div id="cars-slider" class="swiper featured-slider" role="tabpanel" aria-labelledby="cars-tab" hidden>
+                 <div class="heading-container" style="margin-bottom: 1rem; padding: 0 1rem;"> <!-- Heading specific to cars -->
+                     <h2 class="heading" style="font-size: 2rem; text-align: left;">Popular <span>Cars</span></h2>
+                     <a href="webpages/webpage1.html" class="view-all-link">View all cars <i class="fas fa-arrow-right"></i></a>
+                 </div>
+                <div class="swiper-wrapper">
+                    <!-- Car 1 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/p1.jpeg" alt="Car 1 - Luxury Sedan X">
+                        <div class="content">
+                            <h3>Luxury Sedan X</h3>
+                            <div class="price">$65,000 <span>(Est.)</span></div>
+                            <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 183mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Car 2 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/p2.jpeg" alt="Car 2 - SUV Explorer">
+                        <div class="content">
+                            <h3>SUV Explorer</h3>
+                            <div class="price">$72,000 <span>(Est.)</span></div>
+                            <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Diesel
+                                <span class="fas fa-circle"></span> 175mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Car 3 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/p3.jpeg" alt="Car 3 - Compact Cruiser">
+                        <div class="content">
+                            <h3>Compact Cruiser</h3>
+                            <div class="price">$58,000 <span>(Est.)</span></div>
+                             <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Manual
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 160mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Car 4 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/p4.jpeg" alt="Car 4 - Electric Glide">
+                        <div class="content">
+                            <h3>Electric Glide</h3>
+                            <div class="price">$85,000 <span>(Est.)</span></div>
+                             <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Electric
+                                <span class="fas fa-circle"></span> 190mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Car 5 -->
+                     <div class="swiper-slide box">
+                        <img src="assets/p5.jpeg" alt="Car 5 - Hybrid Voyager">
+                        <div class="content">
+                            <h3>Hybrid Voyager</h3>
+                            <div class="price">$61,000 <span>(Est.)</span></div>
+                            <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2023 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Hybrid
+                                <span class="fas fa-circle"></span> 170mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                     <!-- Car 6 -->
+                    <div class="swiper-slide box">
+                        <img src="assets/p6.jpeg" alt="Car 6 - Performance GT">
+                        <div class="content">
+                            <h3>Performance GT</h3>
+                            <div class="price">$75,000 <span>(Est.)</span></div>
+                            <p>
+                               <span class="fas fa-circle"></span> New 
+                                <span class="fas fa-circle"></span> 2024 
+                                <span class="fas fa-circle"></span> Automatic
+                                <span class="fas fa-circle"></span> Petrol
+                                <span class="fas fa-circle"></span> 185mph
+                            </p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer from index.html -->
+    <footer class="footer">
+        <div class="box-container">
+            <div class="box"><h3>Our Branches</h3><a href="#"><i class="fas fa-map-marker-alt"></i>India</a><a href="#"><i class="fas fa-map-marker-alt"></i>Kenya</a><a href="#"><i class="fas fa-map-marker-alt"></i>Canada</a><a href="#"><i class="fas fa-map-marker-alt"></i>Korea</a><a href="#"><i class="fas fa-map-marker-alt"></i>Australia</a><a href="#"><i class="fas fa-map-marker-alt"></i>France</a></div>
+            <div class="box"><h3>Quick Links</h3><a href="index.html#home"><i class="fas fa-arrow-right"></i>Home</a><a href="index.html#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a><a href="index.html#reviews"><i class="fas fa-arrow-right"></i>Reviews</a><a href="index.html#contact"><i class="fas fa-arrow-right"></i>Contact</a></div>
+            <div class="box"><h3>Contact Info</h3><a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a><a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a><a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i>your.email@example.com</a><a href="#"><i class="fas fa-map-marker-alt"></i>Your City, India 123456</a></div>
+            <div class="box"><h3>Social Media</h3><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-instagram"></i>Instagram</a><a href="#"><i class="fab fa-twitter"></i>Twitter</a><a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a><a href="#"><i class="fab fa-pinterest"></i>Pinterest</a><a href="#"><i class="fab fa-reddit"></i>Reddit</a></div>
+        </div>
+        <div class="credit">Made by Group-15 | All rights reserved © 2025</div>
+    </footer>
+
+    <!-- Scripts from index.html -->
+>>>>>>> 61fddce (Your descriptive commit message here)
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js" defer></script>
 
