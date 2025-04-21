@@ -1,128 +1,81 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vroom - Admin</title>
+    <title>Admin Panel - Vroom</title>
+    <!-- Fonts, Icons, AOS, CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your main CSS file -->
-    <style>
-        /* Add specific styles for admin.html here */
-        .admin-container {
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .admin-form {
-            margin-bottom: 2rem;
-            border: 1px solid #ccc;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .btn-submit {
-            padding: 0.8rem 1.5rem;
-            background-color: #28a745; /* Example color */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .inventory-list {
-            list-style: none;
-            padding: 0;
-        }
-        .inventory-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            border-bottom: 1px solid #eee;
-        }
-    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-
-    <!-- Header (from index.html) -->
-    <header class="header">
-        <a href="index.html#home" class="logo"><span>Vr</span>oom</a>
-        <nav class="navbar">
-            <a href="index.html#home">Home</a>
-            <a href="index.html#vehicles">Vehicles</a>
-            <a href="index.html#reviews">Reviews</a>
-            <a href="index.html#contact">Contact</a>
-        </nav>
-        <div id="login">
-            <button class="btn">Login</button>
-            <i class="fas fa-user"></i>
-            <i class="fas fa-bars" id="menu-btn" aria-label="Toggle mobile menu"></i>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Vroom</a>
+            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/vehicle.html">Vehicles</a></li>
+                  <li><a href="/checkout.html">Checkout</a></li>
+                  <li><a href="/payment.html">Payment</a></li>
+                  <li><a href="/admin.html" class="active">Admin</a></li>
+              </ul>
+            </nav>
         </div>
-    </header>
+    </nav>
 
-    <!-- Admin Content -->
-    <main>
-        <div class="admin-container">
-            <h1>Admin Panel</h1>
+    <!-- Main Content: Admin Panel -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="text-center" data-aos="fade-up">Admin Panel</h2>
 
-            <section class="admin-form">
-                <h2>Add/Update Vehicle</h2>
-                <form id="vehicleForm">
+            <div class="admin-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Add New Vehicle</h3>
+                <form id="add-vehicle-form">
                     <div class="form-group">
-                        <label for="vehicleType">Vehicle Type:</label>
-                        <select id="vehicleType" name="vehicleType">
-                            <option value="car">Car</option>
-                            <option value="bike">Bike</option>
-                            <!-- Add more types if needed -->
-                        </select>
+                        <label for="vehicle-name">Vehicle Name</label>
+                        <input type="text" id="vehicle-name" name="vehicle-name" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="vehicleModel">Vehicle Model:</label>
-                        <input type="text" id="vehicleModel" name="vehicleModel" required>
+                        <label for="vehicle-description">Description</label>
+                        <textarea id="vehicle-description" name="vehicle-description" rows="3" required></textarea>
                     </div>
-
                     <div class="form-group">
-                        <label for="availableQuantity">Available Quantity:</label>
-                        <input type="number" id="availableQuantity" name="availableQuantity" min="0" value="1" required>
+                        <label for="vehicle-price">Price per Day</label>
+                        <input type="number" id="vehicle-price" name="vehicle-price" required>
                     </div>
-
-                    <!-- Add more fields as needed (e.g., specifications, price, image URL) -->
-
-                    <button type="submit" class="btn-submit">Submit</button>
+                    <div class="form-group">
+                        <label for="vehicle-image">Image URL</label>
+                        <input type="text" id="vehicle-image" name="vehicle-image" placeholder="URL to vehicle image">
+                    </div>
+                    <button type="submit" class="btn">Add Vehicle</button>
                 </form>
-            </section>
+            </div>
 
-            <section class="inventory">
-                <h2>Vehicle Inventory</h2>
-                <ul id="inventoryList" class="inventory-list">
-                    <!-- Inventory items will be displayed here dynamically -->
-                </ul>
-            </section>
-        </div>
-    </main>
+            <!-- Add more admin features as needed (e.g., edit vehicle, manage bookings) -->
 
-    <!-- Footer (from index.html) -->
-    <footer class="footer">
-        <div class="box-container">
-            <div class="box"><h3>Our Branches</h3><a href="#"><i class="fas fa-map-marker-alt"></i>India</a><a href="#"><i class="fas fa-map-marker-alt"></i>Kenya</a><a href="#"><i class="fas fa-map-marker-alt"></i>Canada</a><a href="#"><i class="fas fa-map-marker-alt"></i>Korea</a><a href="#"><i class="fas fa-map-marker-alt"></i>Australia</a><a href="#"><i class="fas fa-map-marker-alt"></i>France</a></div>
-            <div class="box"><h3>Quick Links</h3><a href="index.html#home"><i class="fas fa-arrow-right"></i>Home</a><a href="index.html#vehicles"><i class="fas fa-arrow-right"></i>Vehicles</a><a href="index.html#reviews"><i class="fas fa-arrow-right"></i>Reviews</a><a href="index.html#contact"><i class="fas fa-arrow-right"></i>Contact</a></div>
-            <div class="box"><h3>Contact Info</h3><a href="tel:+914555451254"><i class="fas fa-phone"></i>+91 455 545 1254</a><a href="tel:+45222244554578"><i class="fas fa-phone"></i>+45 2222 4455 4578</a><a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i>your.email@example.com</a><a href="#"><i class="fas fa-map-marker-alt"></i>Your City, India 123456</a></div>
-            <div class="box"><h3>Social Media</h3><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-instagram"></i>Instagram</a><a href="#"><i class="fab fa-twitter"></i>Twitter</a><a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a><a href="#"><i class="fab fa-pinterest"></i>Pinterest</a><a href="#"><i class="fab fa-reddit"></i>Reddit</a></div>
         </div>
-        <div class="credit">Made by Group-15 | All rights reserved © 2025</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Vroom Vehicle Rentals. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script> <!-- Link to your main script file -->
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Firebase SDK (Add if using Firebase) -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-firestore.js"></script> -->
+    <script src="/js/script.js"></script>
 </body>
 </html>

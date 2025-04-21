@@ -3,81 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="components.css">
-    <style>
-        /* Add any page-specific styles here, if needed */
-        .vehicle-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-    </style>
+    <title>Checkout - Vroom</title>
+    <!-- Fonts, Icons, AOS, CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Checkout</h1>
-
-        <div class="card" id="bookingSummary">
-            <h2>Booking Summary</h2>
-            <div id="vehicleDetails">
-                <!-- Vehicle details will be dynamically inserted here -->
-            </div>
-            <p>Start Date: <span id="startDate"></span></p>
-            <p>End Date: <span id="endDate"></span></p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Vroom</a>
+            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/vehicle.html">Vehicles</a></li>
+                  <li><a href="/checkout.html" class="active">Checkout</a></li>
+                  <li><a href="/payment.html">Payment</a></li>
+                  <li><a href="/admin.html">Admin</a></li>
+              </ul>
+            </nav>
         </div>
+    </nav>
 
-        <button class="button" onclick="processPayment()">Pay Now</button>
-    </div>
+    <!-- Main Content: Checkout Form -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="form-container" data-aos="fade-up">
+                <h3>Checkout</h3>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle">Vehicle</label>
+                        <select id="vehicle" name="vehicle" required>
+                            <option value="">Select a vehicle</option>
+                            <!-- Options will be loaded dynamically using Javascript -->
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start-date">Start Date</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">End Date</label>
+                            <input type="date" id="end-date" name="end-date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Any special requests?"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        // Placeholder vehicle data (replace with actual data fetching later)
-        const vehicles = {
-          '1': { name: 'Example Bike', image: 'placeholder-bike.jpg', price: '100' },
-          '2': { name: 'Another Bike', image: 'placeholder-bike2.jpg', price: '150' },
-          // Add more placeholder vehicles as needed
-        };
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Vroom Vehicle Rentals. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
 
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
-
-        function displayBookingSummary() {
-            var vehicleId = getUrlParameter('vehicleId');
-            var startDate = getUrlParameter('startDate');
-            var endDate = getUrlParameter('endDate');
-
-            document.getElementById('startDate').textContent = startDate;
-            document.getElementById('endDate').textContent = endDate;
-
-            // Display vehicle details
-            const vehicle = vehicles[vehicleId];
-            if (vehicle) {
-                const vehicleDetailsDiv = document.getElementById('vehicleDetails');
-                vehicleDetailsDiv.innerHTML = `
-                    <h3>${vehicle.name}</h3>
-                    <img src="${vehicle.image}" alt="${vehicle.name}" class="vehicle-image">
-                    <p>Price: $${vehicle.price}</p>
-                `;
-            } else {
-                console.error('Vehicle details not found for ID:', vehicleId);
-                const vehicleDetailsDiv = document.getElementById('vehicleDetails');
-                vehicleDetailsDiv.innerHTML = `<p>Vehicle details not found.</p>`;
-            }
-        }
-
-        function processPayment() {
-            alert("Payment successful!");
-            // In a real application, you would integrate with a payment gateway here.
-        }
-
-        // Call the function to display the summary when the page loads
-        displayBookingSummary();
-    </script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Firebase SDK (Add if using Firebase) -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-firestore.js"></script> -->
+    <script src="/js/script.js"></script>
 </body>
 </html>

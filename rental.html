@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - Vroom</title>
+    <title>Rental Confirmation - Vroom</title>
     <!-- Fonts, Icons, AOS, CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,40 +23,29 @@
                   <li><a href="/">Home</a></li>
                   <li><a href="/vehicle.html">Vehicles</a></li>
                   <li><a href="/checkout.html">Checkout</a></li>
-                  <li><a href="/payment.html" class="active">Payment</a></li>
+                  <li><a href="/payment.html">Payment</a></li>
                   <li><a href="/admin.html">Admin</a></li>
               </ul>
             </nav>
         </div>
     </nav>
 
-    <!-- Main Content: Payment Form -->
+    <!-- Main Content: Rental Confirmation -->
     <section class="section-padding">
-        <div class="container">
-            <div class="form-container" data-aos="fade-up">
-                <h3>Secure Payment</h3>
-                <form id="payment-form">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="card-number">Card Number</label>
-                        <input type="text" id="card-number" name="card-number" placeholder="**** **** **** ****" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="expiry-date">Expiry Date</label>
-                            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM / YY" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="number" id="cvv" name="cvv" placeholder="123" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn">Pay Now</button>
-                </form>
+        <div class="container text-center" data-aos="fade-up">
+            <h2>Your Rental is Confirmed!</h2>
+            <p>Thank you for booking with Vroom. Details of your rental are below:</p>
+
+            <!-- Display rental details (Placeholder - will be populated with data) -->
+            <div class="rental-details">
+                <p><strong>Booking ID:</strong> RNT-2023-123</p>
+                <p><strong>Vehicle:</strong> Sedan</p>
+                <p><strong>Start Date:</strong> 2024-01-15</p>
+                <p><strong>End Date:</strong> 2024-01-20</p>
+                <p>A confirmation email has been sent to your registered email address.</p>
             </div>
+
+            <a href="/" class="btn">Back to Home</a>
         </div>
     </section>
 

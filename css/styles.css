@@ -1,0 +1,398 @@
+/* === CSS Reset === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+  color: #444; /* Slightly softer body text */
+  background-color: #f8f9fa;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* === Utilities === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #343a40; /* Darker headings */
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.4rem; }
+
+/* === Header & Navbar === */
+.navbar {
+  background-color: #ffffff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e9ecef;
+  position: sticky; /* Make navbar sticky */
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar nav ul li {
+  margin-left: 25px;
+}
+
+.navbar nav ul li a {
+  color: #343a40;
+  font-weight: 500;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+.navbar nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #007bff;
+  transition: width 0.3s ease;
+}
+
+.navbar nav ul li a:hover::after,
+.navbar nav ul li a.active::after {
+  width: 100%;
+}
+
+/* Mobile Menu Toggle (optional, needs JS) */
+.menu-toggle {
+    display: none; /* Hide by default */
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #343a40;
+    cursor: pointer;
+}
+
+/* === Hero Section === */
+.hero {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* More vibrant gradient */
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === Buttons === */
+.btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.2);
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* === Section Styles === */
+.features-grid, .vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.feature-card, .vehicle-card, .admin-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover, .vehicle-card:hover, .admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.feature-card i, .vehicle-card i {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.vehicle-card img {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  max-height: 200px; /* Limit image height */
+  object-fit: cover; /* Ensure image covers area */
+  width: 100%;
+}
+
+.vehicle-card h4 {
+  margin-bottom: 10px;
+}
+
+.vehicle-card p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.vehicle-card .price {
+  font-weight: bold;
+  color: #28a745; /* Green price */
+  font-size: 1.1rem;
+}
+
+/* === Forms === */
+.form-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h3 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-container .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* === Footer === */
+footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 50px 0 30px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 10px;
+  color: #adb5bd;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #00aaff; /* Lighter blue for footer links */
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+/* === Responsive Design === */
+@media (max-width: 992px) {
+  h1 { font-size: 2.5rem; }
+  .hero h1 { font-size: 3rem; }
+  .navbar nav ul {
+    /* Basic handling - hide for now, needs JS for toggle */
+    /* display: none; */ 
+    /* Alternatively, stack them: */
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    position: absolute;
+    top: 70px; /* Adjust based on navbar height */
+    left: 0;
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    display: none; /* Hide by default, JS will toggle */
+  }
+  .navbar nav ul.active {
+      display: flex; /* Show when active class is added */
+  }
+  .navbar nav ul li {
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+  }
+  .navbar nav ul li a {
+      display: block;
+  }
+  .menu-toggle {
+      display: block; /* Show toggle button */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding { padding: 60px 0; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.9rem; }
+  h3 { font-size: 1.6rem; }
+  .hero { padding: 80px 20px; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 1.1rem; }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .form-container {
+      padding: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.7rem; }
+  h3 { font-size: 1.4rem; }
+  .hero { padding: 60px 15px; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .container { padding: 0 15px; }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .form-container {
+      padding: 20px;
+  }
+}
