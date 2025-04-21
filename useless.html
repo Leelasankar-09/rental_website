@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Vroom</title>
+    <!-- Fonts, Icons, AOS, CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Vroom</a>
+            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/vehicle.html">Vehicles</a></li>
+                  <li><a href="/checkout.html" class="active">Checkout</a></li>
+                  <li><a href="/payment.html">Payment</a></li>
+                  <li><a href="/admin.html">Admin</a></li>
+              </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Main Content: Checkout Form -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="form-container" data-aos="fade-up">
+                <h3>Checkout</h3>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle">Vehicle</label>
+                        <select id="vehicle" name="vehicle" required>
+                            <option value="">Select a vehicle</option>
+                            <!-- Options will be loaded dynamically using Javascript -->
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start-date">Start Date</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">End Date</label>
+                            <input type="date" id="end-date" name="end-date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Any special requests?"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Vroom Vehicle Rentals. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Firebase SDK (Add if using Firebase) -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.x.x/firebase-firestore.js"></script> -->
+    <script src="/js/script.js"></script>
+</body>
+</html>
